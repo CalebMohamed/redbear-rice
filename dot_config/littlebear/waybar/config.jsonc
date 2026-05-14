@@ -24,7 +24,7 @@
         "custom/pomo",
         "pulseaudio",
         "backlight",
-        "keyboard-state",
+        // "keyboard-state",
         "network",
         "tray"
     ],
