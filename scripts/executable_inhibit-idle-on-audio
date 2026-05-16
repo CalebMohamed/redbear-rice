@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+inhibitor_pid=""
+
+cleanup() {
+    if [[ -n "$inhibitor_pid" ]]; then
+        kill "$inhibitor_pid" 2>/dev/null
+    fi
+}
+
+playerctl --follow status | while read -r status; do
+    case "$status" in
+        Playing)
+            if [[ -z "$inhibitor_pid" ]] || ! kill -0 "$inhibitor_pid" 2>/dev/null; then
+                systemd-inhibit --what=idle sleep infinity &
+                inhibitor_pid=$!
+            fi
+            ;;
+        Paused|Stopped)
+            cleanup
+            inhibitor_pid=""
+            ;;
+    esac
+done
