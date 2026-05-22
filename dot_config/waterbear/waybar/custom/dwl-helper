@@ -1,0 +1,40 @@
+#!/bin/sh
+# ~/.local/bin/dwl-helper
+
+state_file="${XDG_CACHE_HOME:-$HOME/.cache}/dwlbar.state"
+
+while read -r line; do
+    # Example expected dwl format (varies by patch/version):
+    # "tags=1 sel=2 occ=3 urg=0 layout=[]="
+    # You MUST adjust parsing to your dwl build
+
+    eval "$line" 2>/dev/null || continue
+
+    # Convert bitmask → tag numbers
+    tags="1 2 3 4 5 6 7 8 9"
+
+    to_list() {
+        mask=$1
+        i=1
+        out=""
+        while [ $i -le 9 ]; do
+            if [ $((mask & (1 << (i-1)))) -ne 0 ]; then
+                out="$out $i"
+            fi
+            i=$((i+1))
+        done
+        echo "$out"
+    }
+
+    focused=$(to_list "${sel:-0}")
+    occupied=$(to_list "${occ:-0}")
+    urgent=$(to_list "${urg:-0}")
+
+    cat > "$state_file" << EOF
+TAGS="$tags"
+FOCUSED="$focused"
+OCCUPIED="$occupied"
+URGENT="$urgent"
+LAYOUT="${layout:-[]="
+EOF
+done

@@ -1,0 +1,17 @@
+# Use 'lch' for perceptually accurate colors
+color_space = "lch"
+palette = "dark"
+check_contrast = true
+
+[thresholds]
+threshold = 22 # for constrast
+min_lw = 2 # not too dark
+max_lw = 15 # not too light
+
+[templates]
+dwl = { template = 'dwl', target = '/tmp/dwl_colors' }
+foot = { template = 'foot', target = '~/.config/littlebear/foot/foot.ini' }
+mako = { template = 'mako', target = '~/.config/littlebear/mako/config' }
+waybar = { template = 'waybar', target = '~/.config/littlebear/waybar/colors.css' }
+wmenu = { template = 'wmenu', target = '~/.cache/wmenu/colors.sh' }
+swaylock = { template = 'swaylock', target = '~/.cache/swaylock/colors.sh' }

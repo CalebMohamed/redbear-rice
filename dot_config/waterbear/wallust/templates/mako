@@ -1,0 +1,15 @@
+font=CaskaydiaCove NFM 12
+background-color={{ background }}  
+text-color={{ foreground }}  
+border-size=2
+border-color={{ color13 }}
+border-radius=8
+padding=12
+width=360
+height=720
+anchor=top-right
+outer-margin=10
+
+[urgency=critical]
+border-color={{ color11 }}
+background-color={{ color0 }}

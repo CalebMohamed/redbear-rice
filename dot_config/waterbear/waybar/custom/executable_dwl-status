@@ -1,0 +1,45 @@
+#!/bin/sh
+# ~/.local/bin/dwl-tags-view
+# Reads a simple shell-formatted state file and prints a compact tag/layout line.
+# Expected file format:
+#   TAGS="1 2 3 4 5 6 7 8 9"
+#   FOCUSED="3"
+#   OCCUPIED="1 2 3 5"
+#   URGENT="5"
+#   LAYOUT="[]="
+#
+# Put this file at: ~/.cache/dwlbar.state
+# and have your dwl helper update it.
+
+set -eu
+
+state_file="${XDG_CACHE_HOME:-$HOME/.cache}/dwlbar.state"
+
+[ -r "$state_file" ] || exit 0
+# shellcheck disable=SC1090
+. "$state_file"
+
+tags="${TAGS:-1 2 3 4 5 6 7 8 9}"
+focused="${FOCUSED:-}"
+occupied=" ${OCCUPIED:-} "
+urgent=" ${URGENT:-} "
+layout="${LAYOUT:-[]=}"
+
+out=""
+for t in $tags; do
+    s="$t"
+
+    case "$occupied" in
+        *" $t "*) : ;;        # occupied: leave as-is
+        *) : ;;
+    esac
+
+    [ "$t" = "$focused" ] && s="[$s]"
+    case "$urgent" in
+        *" $t "*) s="${s}!";;
+    esac
+
+    out="$out $s"
+done
+
+printf '%s  %s\n' "${out# }" "$layout"

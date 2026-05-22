@@ -1,0 +1,9 @@
+#!/bin/sh
+# Variable template for wmenu wrapper to call and then use
+NB="{{background | strip}}"
+NF="{{foreground | strip}}"
+PB="{{color1 | strip}}"
+PF="{{color15 | strip}}"
+SB="{{color1 | strip}}"
+SF="{{color15 | strip}}"
+FONT="CaskaydiaCove NFM 20"

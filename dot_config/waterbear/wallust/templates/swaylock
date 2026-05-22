@@ -1,0 +1,12 @@
+#!/bin/sh
+# Variable template for wmenu wrapper to call and then use
+TEXT="{{color7}}"
+INSIDE="{{color0}}" # default circle color
+INSIDE_VER="{{color5}}" # verified circle color
+INSIDE_WRONG="{{color1}}" # incorrect circle color
+INSIDE_CLEAR="{{color1}}" # input cleared circle color
+RING="{{color5}}" # default outer color
+RING_VER="{{color4}}" # verified outer color
+RING_WRONG="{{color5}}" # wrong outer color
+KEY="{{color2}}" # keypress color
+BACKSPACE="{{color1}}" # backspace color
