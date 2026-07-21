@@ -1,9 +1,8 @@
 // Bar.qml
 import Quickshell
+import "./Widgets"
 
 Scope {
-  // no more time object
-
   Variants {
     model: Quickshell.screens
 
@@ -20,6 +19,18 @@ Scope {
       implicitHeight: 30
 
       ClockWidget {
+        anchors.centerIn: parent
+      }
+
+      PowerWidget {
+        anchors.centerIn: parent
+      }
+
+      TemperatureWidget {
+        anchors.centerIn: parent
+      }
+
+      WorkspaceIndicator {
         anchors.centerIn: parent
       }
     }
