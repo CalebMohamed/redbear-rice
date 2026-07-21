@@ -1,5 +1,5 @@
 import QtQuick
-import "../Services/Temperature.qml"
+import "../Services"
 
 Text {
   // directly access the time property from the Time singleton

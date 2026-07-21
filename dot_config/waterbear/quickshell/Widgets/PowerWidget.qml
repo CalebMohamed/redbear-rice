@@ -1,5 +1,5 @@
 import QtQuick
-import "../Services/Power.qml"
+import "../Services"
 
 Text {
   // directly access the time property from the Time singleton
