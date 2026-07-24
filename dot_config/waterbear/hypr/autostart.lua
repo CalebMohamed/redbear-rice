@@ -6,13 +6,14 @@
 
 -- Autostart necessary processes (like notifications daemons, status bars, etc.)
 -- Or execute your favorite apps at launch like this:
---
+
+local home = os.getenv("HOME")
+
 hl.on("hyprland.start", function () 
   hl.exec_cmd("qs")
-  hl.exec_cmd("set-background 'chintz-pattern.jpg'")
-  hl.exec_cmd("waybar")
-  hl.exec_cmd("inhibit-idle-on-audio")
-  hl.exec_cmd("swayidle -w timeout 300 'gaussian-lock' timeout 360 'systemctl suspend' before-sleep 'gaussian-lock'")
+  hl.exec_cmd(home .. "/.local/bin/set-background 'chintz-pattern.jpg'")
+  hl.exec_cmd(home .. "/.local/bin/inhibit-idle-on-audio")
+  -- hl.exec_cmd("swayidle -w timeout 300 'gaussian-lock' timeout 360 'systemctl suspend' before-sleep 'gaussian-lock'")
   hl.exec_cmd("mako")
   hl.exec_cmd("nm-applet")
   hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")

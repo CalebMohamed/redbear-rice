@@ -2,7 +2,8 @@
 
 A repo for all of my rices managed with chezmoi.
 - littlebear: minimal dwl + waybar rice
-- smoothbear: niri + quickshell rice
+- smoothbear: niri + quickshell rice (abandoned)
+- waterbear: hypr + quickshell rice
 
 ## Overall Setup
 Currently I have it so that there is a start-session

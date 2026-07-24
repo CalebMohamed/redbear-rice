@@ -17,14 +17,7 @@ fi
 
 # Kill the current swaybg instance, and start another
 pkill -x swaybg
-case "$WALLPAPER_BACKEND" in
-  awww)
-    awww img "$blurpaper" --transition-type fade
-    ;;
-  swaybg)
-    swaybg -i "$blurpaper" -m fill > /dev/null 2>&1 &
-    ;;
-esac
+swaybg -i "$blurpaper" -m fill > /dev/null 2>&1 &
 ln -sf "$blurpaper" "$HOME/.local/share/current_wallpaper.jpg"
 
 # use wallust to generate colour pallet and update

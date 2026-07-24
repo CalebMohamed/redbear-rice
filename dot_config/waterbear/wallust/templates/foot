@@ -1,6 +1,6 @@
 [main]
-font=CaskaydiaCove NFM:size=20,JetBrainsMono NFM:size=20,Noto Color Emoji:size=11
-pad=20x20
+font=CaskaydiaCove NFM:size=16,JetBrainsMono NFM:size=16,Noto Color Emoji:size=11
+pad=16x16
 
 [colors-dark]
 alpha=1.0

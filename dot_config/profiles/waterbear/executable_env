@@ -35,9 +35,6 @@ export SSH_AUTH_SOCK
 # user bin
 export PATH="$HOME/.local/bin:$PATH"
 
-# wallpaper backend
-export WALLPAPER_BACKEND="quickshell"
-
 # session binary
 WM_BIN=Hyprland
 WM_ARGS=""

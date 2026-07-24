@@ -12,50 +12,59 @@ Scope {
       required property var modelData
       screen: modelData
 
+      exclusionMode: ExclusionMode.Ignore
+      aboveWindows: true
+
       color: "transparent"
-      implicitHeight: 30
+      implicitWidth: container.implicitWidth
+      implicitHeight: 45
 
       anchors {
         top: true
         left: true
-        right: true
       }
 
-      margins {
-        top: 10
-        left: 20
-        right: 20
-      }
-
+      // purely visual background for the bar
       Rectangle {
+        id: background
+
+        anchors.fill: parent
+        bottomRightRadius: height / 2
+        antialiasing: true
+        color: "#FF111111"
+      }
+
+      Item {
+        id: container
         anchors.fill: parent
 
-        radius: height / 2 // for pill shape
+        readonly property int padLeft: 10
+        readonly property int padRight: 30
+        readonly property int padTop: 10
+        readonly property int padBottom: 15
 
-        color: "#C01E1E2E"
+        implicitWidth: row.implicitWidth + padLeft + padRight
+        implicitHeight: row.implicitHeight + padTop + padBottom
 
         RowLayout {
-          anchors.fill: parent
-          spacing: 2
+          id: row
+          anchors.left: parent.left
+          anchors.right: parent.right
+          anchors.top: parent.top
+          anchors.bottom: parent.bottom
 
-          ClockWidget {
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-          }
+          anchors.leftMargin: container.padLeft
+          anchors.rightMargin: container.padRight
+          anchors.topMargin: container.padTop
+          anchors.bottomMargin: container.padBottom
+          spacing: 12
 
-          PowerWidget {
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-          }
-
-          TemperatureWidget {
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-          }
-
-          WorkspaceIndicator {
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-          }
+          ClockWidget{}
+          PowerWidget{}
+          TemperatureWidget{}
+          WorkspaceIndicator{}
         }
       }
-
     }
   }
 }

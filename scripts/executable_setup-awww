@@ -1,9 +1,0 @@
-awww-daemon &
-
-SOCK="/run/user/$(id -u)/${WAYLAND_DISPLAY}-awww-daemon.sock"
-
-while [ ! -S "$SOCK" ]; do
-  sleep 0.05
-done
-
-set-background chintz-pattern.jpg

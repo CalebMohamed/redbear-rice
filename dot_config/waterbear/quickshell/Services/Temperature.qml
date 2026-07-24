@@ -11,10 +11,10 @@ QtObject {
   property var _tempValue: null
 
   // Readonly formatted property exposed globally
-  readonly property string temperature: _tempValue !== null ? _tempValue + "°C" : "N/A"
+  readonly property var temperature: _tempValue 
 
   // Sensor reader
-  property FileView _sensorFile: FileView {
+  property FileView sensorFile: FileView {
     id: sensorFile
     path: "/sys/class/thermal/thermal_zone7/temp"
     watchChanges: true

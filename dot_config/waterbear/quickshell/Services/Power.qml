@@ -5,11 +5,11 @@ import Quickshell.Services.UPower
 import QtQuick
 
 Singleton {
-    id: root
+  id: root
 
-    // Access UPower directly via displayDevice
-    readonly property string energy: {
-        const device = UPower.displayDevice;
-        return device ? Math.round(device.percentage * 100) + "%" : "N/A";
-    }
+  readonly property bool charging: UPower.displayDevice.state === 1
+  readonly property var energy:
+    UPower.displayDevice.ready
+      ? Math.round(UPower.displayDevice.percentage) * 100
+      : null
 }

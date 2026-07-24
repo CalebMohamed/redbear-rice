@@ -5,12 +5,12 @@ import QtQuick
 
 Singleton {
   id: root
-  // an expression can be broken across multiple lines using {}
-  readonly property string time: {
-    // The passed format string matches the default output of
-    // the `date` command.
+  readonly property string dateTime: {
     Qt.formatDateTime(clock.date, "ddd d MMM | hh:mm AP")
   }
+
+  readonly property string date: Qt.formatDateTime(clock.date, "d MMM")
+  readonly property string time: Qt.formatDateTime(clock.date, "hh:mm AP")
 
   SystemClock {
     id: clock

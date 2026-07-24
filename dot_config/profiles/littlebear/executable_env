@@ -9,7 +9,6 @@ export GNOME_KEYRING_CONTROL
 export SSH_AUTH_SOCK
 
 export PATH="$HOME/.local/bin:$PATH"
-export WALLPAPER_BACKEND="swaybg"
 
 WM_BIN=dwl
 WM_ARGS=
