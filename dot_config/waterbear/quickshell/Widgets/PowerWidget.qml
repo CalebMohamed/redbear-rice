@@ -1,5 +1,6 @@
 import QtQuick
 import "../Services"
+import qs as Shell
 
 Text {
   function powerFormat(p, charging) {
@@ -16,6 +17,6 @@ Text {
   }
 
   text: powerFormat(Power.energy, Power.charging)
-  font: Style.uiFont
+  font: Shell.Style.uiFont
   color: "white"
 }

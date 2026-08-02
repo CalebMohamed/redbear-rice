@@ -1,5 +1,6 @@
 import QtQuick
 import "../Services"
+import qs as Shell
 
 Text {
   function tempFormat(t) {
@@ -12,6 +13,6 @@ Text {
   }
 
   text: tempFormat(Temperature.temperature)
-  font: Style.uiFont
+  font: Shell.Style.uiFont
   color: "white"
 }

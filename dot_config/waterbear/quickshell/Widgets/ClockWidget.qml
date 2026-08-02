@@ -1,8 +1,9 @@
 import QtQuick
 import "../Services"
+import qs as Shell
 
 Text {
   text: Time.date
-  font: Style.uiFont
+  font: Shell.Style.uiFont
   color: "white"
 }
