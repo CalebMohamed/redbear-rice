@@ -144,10 +144,10 @@
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "custom/wireguard": {
-      "exec": "$HOME/.config/waybar/scripts/wireguard-status",
+      "exec": "~/.config/littlebear/waybar/custom/wireguard-status",
       "return-type": "json",
       "interval": 2,
-      "on-click": "$HOME/.config/waybar/scripts/wireguard-toggle"
+      "on-click": "~/.config/littlebear/waybar/custom/wireguard-toggle"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

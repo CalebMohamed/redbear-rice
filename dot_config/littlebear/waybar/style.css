@@ -144,9 +144,10 @@ label:focus {
     background-color: @background;
 }
 
-#custom-wireguard.disconnected {
-    padding: 0;
-    margin: 0;
+
+#custom-wireguard.connected {
+  background-color: @foreground;
+  color: @background;
 }
 
 #network.disconnected {
