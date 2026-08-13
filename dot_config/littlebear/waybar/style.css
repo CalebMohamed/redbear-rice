@@ -73,6 +73,7 @@ button:hover {
 #mpris,
 #custom-pomo,
 #backlight,
+#custom-wireguard,
 #network,
 #pulseaudio,
 #wireplumber,
@@ -141,6 +142,11 @@ button:hover {
 
 label:focus {
     background-color: @background;
+}
+
+#custom-wireguard.disconnected {
+    padding: 0;
+    margin: 0;
 }
 
 #network.disconnected {

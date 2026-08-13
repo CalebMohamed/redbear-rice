@@ -25,6 +25,7 @@
         "pulseaudio",
         "backlight",
         // "keyboard-state",
+        "custom/wireguard",
         "network",
         "tray"
     ],
@@ -142,6 +143,12 @@
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
+    "custom/wireguard": {
+      "exec": "$HOME/.config/waybar/scripts/wireguard-status",
+      "return-type": "json",
+      "interval": 2,
+      "on-click": "$HOME/.config/waybar/scripts/wireguard-toggle"
+    },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
@@ -151,26 +158,26 @@
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+          "headphone": "",
+          "hands-free": "",
+          "headset": "",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
     },
     "custom/media": {
-        "format": "{icon} {text}",
-        "return-type": "json",
-        "max-length": 40,
-        "format-icons": {
-            "spotify": "",
-            "default": "🎜"
-        },
-        "escape": true,
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
+      "format": "{icon} {text}",
+      "return-type": "json",
+      "max-length": 40,
+      "format-icons": {
+        "spotify": "",
+        "default": "🎜"
+      },
+      "escape": true,
+      "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     }
 }
