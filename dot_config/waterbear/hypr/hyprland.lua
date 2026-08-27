@@ -1,3 +1,4 @@
+require("autostart")
 require("monitors")
 require("env")
 require("permissions")

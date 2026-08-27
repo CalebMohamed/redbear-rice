@@ -36,5 +36,5 @@ export SSH_AUTH_SOCK
 export PATH="$HOME/.local/bin:$PATH"
 
 # session binary
-WM_BIN=Hyprland
+WM_BIN=start-hyprland
 WM_ARGS=""
