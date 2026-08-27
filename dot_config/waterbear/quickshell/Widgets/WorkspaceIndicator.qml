@@ -6,7 +6,7 @@ Row {
   spacing: 2
 
   Repeater {
-    model: 9 // made for 9 workspaces
+    model: 10 // made for 10 workspaces
 
     delegate: Rectangle {
       readonly property int wsId: index + 1
