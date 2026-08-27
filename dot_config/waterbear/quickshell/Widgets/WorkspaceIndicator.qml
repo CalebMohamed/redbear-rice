@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell.Hyprland
+import WallustTheme
 
 // all of this is assuming that the pips are 12 tall
 Row {
@@ -36,12 +37,9 @@ Row {
 
       // dynamic color based on state
       color: {
-        // focused give purple
-        if (isFocused) return "#00d5be";
-        // populated give light teal
-        if (isPopulated) return "#90a1b9";
-        // else empty give dark teal
-        return "#314158";                       
+        if (isFocused) return Colors.accent;
+        if (isPopulated) return Colors.textMuted;
+        return Colors.backgroundAlt;                       
       }
     }
   }

@@ -2,6 +2,7 @@ import Quickshell
 import QtQuick
 import QtQuick.Layouts
 import "./Widgets"
+import WallustTheme
 
 Scope {
   id: root
@@ -10,7 +11,7 @@ Scope {
 
   property real borderSize: 30
   property real cornerRadius: 15
-  property color borderColor: "#020618"
+  property color borderColor: Colors.background
 
   // =========================
   // Visual root overlays

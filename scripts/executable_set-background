@@ -29,3 +29,5 @@ wallust run "$wallpaper"
 pkill -USR1 -x dwl
 # send signal to mako
 makoctl reload
+# send signal to reload qs
+qs ipc call shell reload

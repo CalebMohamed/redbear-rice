@@ -1,9 +1,17 @@
 import Quickshell
+import Quickshell.Io
 import "./Services"
 
 Scope {
-  // Bar {}
-  
+  // this is for the wallust triggered reloads
+  IpcHandler {
+    target: "shell"
+
+    function reload(): void {
+      Quickshell.reload(false)
+    }
+  }
+
   Variants {
     model: Quickshell.screens
 

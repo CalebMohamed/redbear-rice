@@ -1,9 +1,10 @@
 import QtQuick
 import "../Services"
 import qs as Shell
+import WallustTheme
 
 Text {
   text: Time.date
   font: Shell.Style.uiFont
-  color: "white"
+  color: Colors.text
 }

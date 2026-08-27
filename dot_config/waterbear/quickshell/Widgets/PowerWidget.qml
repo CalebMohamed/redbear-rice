@@ -1,6 +1,7 @@
 import QtQuick
 import "../Services"
 import qs as Shell
+import WallustTheme
 
 Text {
   function powerFormat(p, charging) {
@@ -16,7 +17,15 @@ Text {
     return `${p}% ${icon}`
   }
 
+  function powerColor(p, charging) {
+    if (p === null) return Colors.textMuted
+
+    return charging ? Colors.accent
+      : p < 10 ? Colors.urgent
+      : Colors.text
+  }
+
   text: powerFormat(Power.energy, Power.charging)
   font: Shell.Style.uiFont
-  color: "white"
+  color: powerColor(Power.energy, Power.charging)
 }

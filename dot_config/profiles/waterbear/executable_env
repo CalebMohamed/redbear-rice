@@ -15,6 +15,9 @@ export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=qt6ct
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
 
+# QML in order to discover the wallust colour
+export QML_IMPORT_PATH="$HOME/.cache/qml${QML_IMPORT_PATH:+:$QML_IMPORT_PATH}"
+
 # GTK
 export GDK_BACKEND=wayland,x11
 
