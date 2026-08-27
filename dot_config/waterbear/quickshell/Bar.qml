@@ -1,4 +1,3 @@
-// Bar.qml
 import Quickshell
 import QtQuick
 import QtQuick.Layouts
@@ -17,7 +16,8 @@ Scope {
 
       color: "transparent"
       implicitWidth: container.implicitWidth
-      implicitHeight: 45
+      implicitHeight: container.implicitHeight
+      // implicitHeight: 45
 
       anchors {
         top: true
@@ -31,7 +31,7 @@ Scope {
         anchors.fill: parent
         bottomRightRadius: height / 2
         antialiasing: true
-        color: "#FF111111"
+        color: "#CC111111"
       }
 
       Item {
