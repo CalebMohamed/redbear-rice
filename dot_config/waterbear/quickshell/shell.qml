@@ -1,3 +1,4 @@
+import QtQml
 import Quickshell
 import Quickshell.Io
 import "./Services"
@@ -9,6 +10,15 @@ Scope {
 
     function reload(): void {
       Quickshell.reload(false)
+    }
+  }
+
+  // inhibits the reload popup (since I have it reload on every background change)
+  Connections {
+    target: Quickshell
+
+    function onReloadCompleted(): void {
+      Quickshell.inhibitReloadPopup()
     }
   }
 
