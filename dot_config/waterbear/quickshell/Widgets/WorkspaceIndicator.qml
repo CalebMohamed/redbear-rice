@@ -1,9 +1,9 @@
 import QtQuick
 import Quickshell.Hyprland
 
-// all of this is assuming that the pips are 8 wide
+// all of this is assuming that the pips are 12 tall
 Row {
-  spacing: 2
+  spacing: 3
 
   Repeater {
     model: 10 // made for 10 workspaces
@@ -21,9 +21,9 @@ Row {
         ws => ws.id === wsId
       )
 
-      width: isFocused ? 10 : 8
-      height: 10
-      radius: isFocused ? 5 : 2
+      width: isFocused ? 12 : 10
+      height: 12
+      radius: isFocused ? 6 : 3
 
       transformOrigin: Item.Center
       y: isFocused ? -1 : 0 

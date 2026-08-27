@@ -8,8 +8,8 @@ Scope {
 
   required property var screen
 
-  property real borderSize: 20
-  property real cornerRadius: 10
+  property real borderSize: 30
+  property real cornerRadius: 15
   property color borderColor: "#020618"
 
   // =========================
@@ -96,7 +96,7 @@ Scope {
       anchors {
         left: parent.left
         verticalCenter: parent.verticalCenter
-        leftMargin: 30
+        leftMargin: 45
       }
 
       implicitWidth: blWidgets.implicitWidth
@@ -130,7 +130,6 @@ Scope {
       required property var modelData
 
       screen: root.screen
-      aboveWindows: true
       exclusionMode: ExclusionMode.Ignore
       color: "transparent"
 
