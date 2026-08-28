@@ -86,6 +86,22 @@ Scope {
         TemperatureWidget{}
       }
     }
+
+    // top middle widgets
+    Item {
+      anchors.centerIn: parent
+
+      implicitWidth: tmWidgets.implicitWidth
+      implicitHeight: tmWidgets.implicitHeight
+
+      RowLayout {
+        id: tmWidgets
+        anchors.centerIn: parent
+        spacing: 12
+
+        TitleWidget{}
+      }
+    }
   }
 
   // bottom border overlay
