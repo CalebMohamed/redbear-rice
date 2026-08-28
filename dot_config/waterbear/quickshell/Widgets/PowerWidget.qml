@@ -1,36 +1,65 @@
-import QtQuick
-import "../Services"
 import qs as Shell
+import QtQuick
+import QtQuick.Controls
 import WallustTheme
+import "../Services"
 
 Text {
-  function powerFormat(p, charging) {
-    if (p === null) return "N/A"
+  property bool expanded: false
+  property bool highlight: false
 
-    const icon = charging ? ""
-      : p < 10 ? "󰁺"
-      : p < 20 ? "󰁻"  
-      : p < 30 ? "󰁼"
-      : p < 40 ? "󰁽"
-      : p < 50 ? "󰁾"
-      : p < 60 ? "󰁿"
-      : p < 70 ? "󰂀"
-      : p < 80 ? "󰂁"
-      : p < 90 ? "󰂂"
-      : "󰁹"
+  // function powerIcon(p, charging) {
+  //   return p === null ? ""
+  //     : charging ? ""
+  //     : p < 10 ? "󰁺"
+  //     : p < 20 ? "󰁻"  
+  //     : p < 30 ? "󰁼"
+  //     : p < 40 ? "󰁽"
+  //     : p < 50 ? "󰁾"
+  //     : p < 60 ? "󰁿"
+  //     : p < 70 ? "󰂀"
+  //     : p < 80 ? "󰂁"
+  //     : p < 90 ? "󰂂"
+  //     : "󰁹"
+  // }
 
-    return `${p}% ${icon}`
+  function powerIcon(p, charging) {
+    return p === null ? ""
+      : charging ? ""
+      : p < 20 ? ""  
+      : p < 40 ? ""
+      : p < 60 ? ""  
+      : p < 80 ? ""
+      : ""  
   }
 
   function powerColor(p, charging) {
-    if (p === null) return Colors.textMuted
-
-    return charging ? Colors.accent
-      : p < 10 ? Colors.urgent
-      : Colors.text
+    return highlight ? Colors.accent
+    : p === null ? Colors.textMuted
+    : charging ? Colors.accent
+    : p < 10 ? Colors.urgent
+    : Colors.text
   }
 
-  text: powerFormat(Power.energy, Power.charging)
+  text: {
+    const icon = powerIcon(Power.energy, Power.charging)
+
+    if (!expanded)
+    return icon
+
+    return `${icon} ${Power.energy === null ? "N/A" : `${Power.energy}%`}`
+  }
+
   font: Shell.Style.uiFont
   color: powerColor(Power.energy, Power.charging)
+
+  MouseArea { 
+    anchors.fill: parent 
+    hoverEnabled: true
+    onClicked: expanded = !expanded
+
+    // for visuals
+    onEntered: highlight = true
+    onExited: highlight = false
+  }
 }

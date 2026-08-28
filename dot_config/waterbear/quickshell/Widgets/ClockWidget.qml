@@ -4,7 +4,16 @@ import qs as Shell
 import WallustTheme
 
 Text {
-  text: Time.date
+  property bool showTime: false
+
+  text: showTime ? Time.time : Time.date
   font: Shell.Style.uiFont
   color: Colors.text
+
+  MouseArea { 
+    anchors.fill: parent 
+    hoverEnabled: true 
+    onEntered: showTime = true 
+    onExited: showTime = false 
+  }
 }

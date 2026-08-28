@@ -3,6 +3,7 @@ import QtQuick
 import QtQuick.Layouts
 import "./Widgets"
 import WallustTheme
+import QtQuick.Controls
 
 Scope {
   id: root
@@ -62,17 +63,26 @@ Scope {
     exclusionMode: ExclusionMode.Ignore
     color: "transparent"
 
-    // middle widgets
+    // top left widgets
     Item {
-      id: container
-      anchors.centerIn: parent
+      anchors {
+        left: parent.left
+        verticalCenter: parent.verticalCenter
+        leftMargin: root.borderSize + root.cornerRadius
+      }
+
+      implicitWidth: tlWidgets.implicitWidth
+      implicitHeight: tlWidgets.implicitHeight
 
       RowLayout {
+        id: tlWidgets
         anchors.centerIn: parent
         spacing: 12
 
-        ClockWidget{}
-        PowerWidget{}
+        PowerWidget{ expanded: true }
+        CPUWidget{}
+        RAMWidget{}
+        StorageWidget{}
         TemperatureWidget{}
       }
     }
@@ -97,7 +107,7 @@ Scope {
       anchors {
         left: parent.left
         verticalCenter: parent.verticalCenter
-        leftMargin: 45
+        leftMargin: root.borderSize + root.cornerRadius
       }
 
       implicitWidth: blWidgets.implicitWidth
@@ -109,6 +119,7 @@ Scope {
         spacing: 12
 
         WorkspaceIndicator{}
+        ClockWidget{}
       }
     }
   }

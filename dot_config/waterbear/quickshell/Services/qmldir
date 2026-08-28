@@ -1,3 +1,6 @@
+singleton CPU 1.0 CPU.qml
+singleton RAM 1.0 RAM.qml
 singleton Power 1.0 Power.qml
+singleton Storage 1.0 Storage.qml
 singleton Temperature 1.0 Temperature.qml
 singleton Time 1.0 Time.qml
