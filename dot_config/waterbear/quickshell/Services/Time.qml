@@ -5,6 +5,7 @@ import QtQuick
 
 Singleton {
   id: root
+
   readonly property string dateTime: {
     Qt.formatDateTime(clock.date, "ddd d MMM | hh:mm AP")
   }

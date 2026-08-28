@@ -7,8 +7,9 @@ import Quickshell.Io
 Singleton {
   id: root
 
-  property real _usage: 0
   readonly property real usage: _usage
+
+  property real _usage: 0
 
   Process {
     id: storageReader

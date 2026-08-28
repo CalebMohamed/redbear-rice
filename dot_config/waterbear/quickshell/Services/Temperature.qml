@@ -7,11 +7,9 @@ import Quickshell.Io
 QtObject {
   id: root
 
-  // Internal raw value (null until loaded)
-  property var _tempValue: null
-
-  // Readonly formatted property exposed globally
   readonly property var temperature: _tempValue 
+
+  property var _tempValue: null
 
   // Sensor reader
   property FileView sensorFile: FileView {

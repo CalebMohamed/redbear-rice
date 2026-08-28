@@ -102,6 +102,26 @@ Scope {
         TitleWidget{}
       }
     }
+
+    // top right widgets
+    Item {
+      anchors {
+        right: parent.right
+        verticalCenter: parent.verticalCenter
+        rightMargin: root.borderSize + root.cornerRadius
+      }
+
+      implicitWidth: trWidgets.implicitWidth
+      implicitHeight: trWidgets.implicitHeight
+
+      RowLayout {
+        id: trWidgets
+        anchors.centerIn: parent
+        spacing: 12
+
+        NetworkWidget{ expanded: true }
+      }
+    }
   }
 
   // bottom border overlay

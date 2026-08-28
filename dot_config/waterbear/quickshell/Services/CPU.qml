@@ -7,11 +7,11 @@ import Quickshell.Io
 Singleton {
     id: root
 
+    readonly property real usage: _usage
+
     property real _usage: 0
     property int _prevTotal: 0
     property int _prevIdle: 0
-
-    readonly property real usage: _usage
 
     Process {
         id: cpuReader
