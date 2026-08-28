@@ -71,8 +71,8 @@ Scope {
         leftMargin: root.borderSize + root.cornerRadius
       }
 
-      implicitWidth: tlWidgets.implicitWidth
-      implicitHeight: tlWidgets.implicitHeight
+      width: tlWidgets.width
+      height: tlWidgets.height
 
       RowLayout {
         id: tlWidgets
@@ -91,8 +91,8 @@ Scope {
     Item {
       anchors.centerIn: parent
 
-      implicitWidth: tmWidgets.implicitWidth
-      implicitHeight: tmWidgets.implicitHeight
+      width: tmWidgets.width
+      height: tmWidgets.height
 
       RowLayout {
         id: tmWidgets
@@ -111,8 +111,8 @@ Scope {
         rightMargin: root.borderSize + root.cornerRadius
       }
 
-      implicitWidth: trWidgets.implicitWidth
-      implicitHeight: trWidgets.implicitHeight
+      width: trWidgets.width
+      height: trWidgets.height
 
       RowLayout {
         id: trWidgets
@@ -126,6 +126,7 @@ Scope {
 
   // bottom border overlay
   PanelWindow {
+    id: bwidgets
     screen: root.screen
 
     anchors {
@@ -146,8 +147,8 @@ Scope {
         leftMargin: root.borderSize + root.cornerRadius
       }
 
-      implicitWidth: blWidgets.implicitWidth
-      implicitHeight: blWidgets.implicitHeight
+      width: blWidgets.width
+      height: blWidgets.height
 
       RowLayout {
         id: blWidgets
@@ -156,6 +157,7 @@ Scope {
 
         WorkspaceIndicator{}
         ClockWidget{}
+        TimerWidget{}
       }
     }
   }
