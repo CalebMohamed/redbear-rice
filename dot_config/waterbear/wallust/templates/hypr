@@ -1,0 +1,31 @@
+return {
+  -- semantic properties
+  background =    "{{ background }}",
+  backgroundAlt = "{{ background | lighten(0.05) }}",
+  surface =       "{{ background | lighten(0.10) }}",
+  text =          "{{ foreground }}",
+  textMuted =     "{{ foreground | darken(0.25) }}",
+  accent =        "{{ color4 }}",
+  urgent =        "{{ color11 }}",
+
+  -- dark
+  regular0 = "{{ color0 }}",    -- black
+  regular1 = "{{ color1 }}",    -- red
+  regular2 = "{{ color2 }}",    -- green
+  regular3 = "{{ color3 }}",    -- yellow
+  regular4 = "{{ color4 }}",    -- blue
+  regular5 = "{{ color5 }}",    -- magenta
+  regular6 = "{{ color6 }}",    -- cyan
+  regular7 = "{{ color7 }}",    -- white
+
+  
+  -- light
+  bright0 = "{{ color8 }}",     -- bright black
+  bright1 = "{{ color9 }}",     -- bright red
+  bright2 = "{{ color10 }}",    -- bright green
+  bright3 = "{{ color11 }}",    -- bright yellow
+  bright4 = "{{ color12 }}",    -- bright blue
+  bright5 = "{{ color13 }}",    -- bright magenta
+  bright6 = "{{ color14 }}",    -- bright cyan
+  bright7 = "{{ color15 }}",    -- bright white
+}

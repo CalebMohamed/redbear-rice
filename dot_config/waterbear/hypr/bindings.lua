@@ -26,11 +26,17 @@ hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("ls $HOME/pictures/wallpapers
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 -- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 
--- Move focus with mainMod + arrow keys
+-- Dwindle movement and swapping
 hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
-hl.bind(mainMod .. " + k",    hl.dsp.focus({ direction = "up" }))
-hl.bind(mainMod .. " + j",  hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + K",    hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + J",  hl.dsp.focus({ direction = "down" }))
+
+hl.bind(mainMod .. " + SHIFT + H",  hl.dsp.window.swap({ direction = "left" }))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.swap({ direction = "right" }))
+hl.bind(mainMod .. " + SHIFT + K",    hl.dsp.window.swap({ direction = "up" }))
+hl.bind(mainMod .. " + SHIFT + J",  hl.dsp.window.swap({ direction = "down" }))
+
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]

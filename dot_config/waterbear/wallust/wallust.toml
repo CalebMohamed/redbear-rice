@@ -13,4 +13,5 @@ foot = { template = 'foot', target = '~/.config/waterbear/foot/foot.ini' }
 mako = { template = 'mako', target = '~/.config/waterbear/mako/config' }
 wmenu = { template = 'wmenu', target = '~/.cache/wmenu/colors.sh' }
 qml = { template = 'qml', target = '~/.cache/qml/WallustTheme/Colors.qml' }
+hypr = { template = 'hypr', target = '~/.cache/hypr/colors.lua' }
 swaylock = { template = 'swaylock', target = '~/.cache/swaylock/colors.sh' }

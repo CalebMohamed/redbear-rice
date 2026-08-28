@@ -31,3 +31,5 @@ pkill -USR1 -x dwl
 makoctl reload
 # send signal to reload qs
 qs ipc call shell reload
+# send signal to reload hyprland
+hyprctl reload
