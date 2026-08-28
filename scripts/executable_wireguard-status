@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if ip link show wg0 >/dev/null 2>&1; then
+    printf '{"text":"󰌆","class":"connected","tooltip":"WireGuard: connected"}\n'
+else
+    printf '{"text":"󰌊","class":"disconnected","tooltip":"WireGuard: disconnected"}\n'
+fi

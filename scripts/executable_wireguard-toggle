@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if ip link show wg0 >/dev/null 2>&1; then
+    sudo wg-quick down wg0
+else
+    sudo wg-quick up wg0
+fi

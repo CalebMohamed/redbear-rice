@@ -34,4 +34,12 @@ Scope {
     }
   }
 
+  Variants {
+    model: Quickshell.screens
+
+    FrameWidgets {
+      required property var modelData
+      screen: modelData
+    }
+  }
 }

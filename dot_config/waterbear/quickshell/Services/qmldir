@@ -5,3 +5,4 @@ singleton RAM 1.0 RAM.qml
 singleton Storage 1.0 Storage.qml
 singleton Temperature 1.0 Temperature.qml
 singleton Time 1.0 Time.qml
+singleton TimerService 1.0 TimerService.qml

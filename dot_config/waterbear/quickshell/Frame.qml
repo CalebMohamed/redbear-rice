@@ -1,17 +1,18 @@
 import Quickshell
+
 import QtQuick
 import QtQuick.Layouts
-import "./Widgets"
-import WallustTheme
 import QtQuick.Controls
+
+import qs as Shell
+import WallustTheme
+
+import "./Widgets"
 
 Scope {
   id: root
 
   required property var screen
-
-  property real borderSize: 30
-  property real cornerRadius: 15
   property color borderColor: Colors.background
 
   // =========================
@@ -19,10 +20,10 @@ Scope {
   // =========================
 
   readonly property var borders: [
-    { top: true, bottom: false, left: true, right: true, width: 0, height: borderSize },
-    { top: false, bottom: true, left: true, right: true, width: 0, height: borderSize },
-    { top: true, bottom: true, left: true, right: false, width: borderSize, height: 0 },
-    { top: true, bottom: true, left: false, right: true, width: borderSize, height: 0 }
+    { top: true, bottom: false, left: true, right: true, width: 0, height: Shell.Style.borderSize },
+    { top: false, bottom: true, left: true, right: true, width: 0, height: Shell.Style.borderSize },
+    { top: true, bottom: true, left: true, right: false, width: Shell.Style.borderSize, height: 0 },
+    { top: true, bottom: true, left: false, right: true, width: Shell.Style.borderSize, height: 0 }
   ]
 
   Variants {
@@ -42,123 +43,6 @@ Scope {
       implicitWidth: modelData.width
       implicitHeight: modelData.height
       color: root.borderColor
-    }
-  }
-
-  // =========================
-  // Widgets
-  // =========================
-
-  // top border widgets
-  PanelWindow {
-    screen: root.screen
-
-    anchors {
-      top: true
-      left: true
-      right: true
-    }
-
-    implicitHeight: root.borderSize
-    exclusionMode: ExclusionMode.Ignore
-    color: "transparent"
-
-    // top left widgets
-    Item {
-      anchors {
-        left: parent.left
-        verticalCenter: parent.verticalCenter
-        leftMargin: root.borderSize + root.cornerRadius
-      }
-
-      width: tlWidgets.width
-      height: tlWidgets.height
-
-      RowLayout {
-        id: tlWidgets
-        anchors.centerIn: parent
-        spacing: 12
-
-        PowerWidget{ expanded: true }
-        CPUWidget{}
-        RAMWidget{}
-        StorageWidget{}
-        TemperatureWidget{}
-      }
-    }
-
-    // top middle widgets
-    Item {
-      anchors.centerIn: parent
-
-      width: tmWidgets.width
-      height: tmWidgets.height
-
-      RowLayout {
-        id: tmWidgets
-        anchors.centerIn: parent
-        spacing: 12
-
-        TitleWidget{}
-      }
-    }
-
-    // top right widgets
-    Item {
-      anchors {
-        right: parent.right
-        verticalCenter: parent.verticalCenter
-        rightMargin: root.borderSize + root.cornerRadius
-      }
-
-      width: trWidgets.width
-      height: trWidgets.height
-
-      RowLayout {
-        id: trWidgets
-        anchors.centerIn: parent
-        spacing: 12
-
-        NetworkWidget{ expanded: true }
-      }
-    }
-  }
-
-  // bottom border overlay
-  PanelWindow {
-    id: bwidgets
-    screen: root.screen
-
-    anchors {
-      bottom: true
-      left: true
-      right: true
-    }
-
-    implicitHeight: root.borderSize
-    exclusionMode: ExclusionMode.Ignore
-    color: "transparent"
-
-    // bottom left widgets
-    Item {
-      anchors {
-        left: parent.left
-        verticalCenter: parent.verticalCenter
-        leftMargin: root.borderSize + root.cornerRadius
-      }
-
-      width: blWidgets.width
-      height: blWidgets.height
-
-      RowLayout {
-        id: blWidgets
-        anchors.centerIn: parent
-        spacing: 12
-
-        WorkspaceIndicator{}
-        ClockWidget{}
-        TimerWidget{}
-      }
     }
   }
 
@@ -183,8 +67,8 @@ Scope {
       exclusionMode: ExclusionMode.Ignore
       color: "transparent"
 
-      implicitWidth: root.borderSize + root.cornerRadius
-      implicitHeight: root.borderSize + root.cornerRadius
+      implicitWidth: Shell.Style.borderSize + Shell.Style.cornerRadius
+      implicitHeight: Shell.Style.borderSize + Shell.Style.cornerRadius
 
       anchors {
         top: modelData.top
@@ -196,8 +80,8 @@ Scope {
       BevelCorner {
         anchors.fill: parent
         rotation: modelData.rotation
-        borderWidth: root.borderSize
-        radius: root.cornerRadius
+        borderWidth: Shell.Style.borderSize
+        radius: Shell.Style.cornerRadius
         color: root.borderColor
       }
     }
