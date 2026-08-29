@@ -147,30 +147,44 @@ PanelWindow {
     y: root.open ? shownY : hiddenY
 
     Behavior on x {
-      SequentialAnimation {
-        PauseAnimation {
-          duration: root.open ? 100 : 0
-        }
-
-        NumberAnimation {
-          duration: 100
-          easing.type: Easing.OutCubic
-        }
+      NumberAnimation {
+        duration: 200
+        easing.type: Easing.OutCubic
       }
     }
 
     Behavior on y {
-      SequentialAnimation {
-        PauseAnimation {
-          duration: root.open ? 100 : 0
-        }
-
-        NumberAnimation {
-          duration: 100
-          easing.type: Easing.OutCubic
-        }
+      NumberAnimation {
+        duration: 200
+        easing.type: Easing.OutCubic
       }
     }
+
+    // Behavior on x {
+    //   SequentialAnimation {
+    //     PauseAnimation {
+    //       duration: root.open ? 100 : 0
+    //     }
+
+    //     NumberAnimation {
+    //       duration: 100
+    //       easing.type: Easing.OutCubic
+    //     }
+    //   }
+    // }
+
+    // Behavior on y {
+    //   SequentialAnimation {
+    //     PauseAnimation {
+    //       duration: root.open ? 100 : 0
+    //     }
+
+    //     NumberAnimation {
+    //       duration: 100
+    //       easing.type: Easing.OutCubic
+    //     }
+    //   }
+    // }
   }
 
   // Trailing bevel
@@ -213,29 +227,43 @@ PanelWindow {
     y: root.open ? shownY : hiddenY
 
     Behavior on x {
-      SequentialAnimation {
-        PauseAnimation {
-          duration: root.open ? 100 : 0
-        }
-
-        NumberAnimation {
-          duration: 100
-          easing.type: Easing.OutCubic
-        }
+      NumberAnimation {
+        duration: 200
+        easing.type: Easing.OutCubic
       }
     }
 
     Behavior on y {
-      SequentialAnimation {
-        PauseAnimation {
-          duration: root.open ? 100 : 0
-        }
-
-        NumberAnimation {
-          duration: 100
-          easing.type: Easing.OutCubic
-        }
+      NumberAnimation {
+        duration: 200
+        easing.type: Easing.OutCubic
       }
     }
+
+    // Behavior on x {
+    //   SequentialAnimation {
+    //     PauseAnimation {
+    //       duration: root.open ? 100 : 0
+    //     }
+
+    //     NumberAnimation {
+    //       duration: 100
+    //       easing.type: Easing.OutCubic
+    //     }
+    //   }
+    // }
+
+    // Behavior on y {
+    //   SequentialAnimation {
+    //     PauseAnimation {
+    //       duration: root.open ? 100 : 0
+    //     }
+
+    //     NumberAnimation {
+    //       duration: 100
+    //       easing.type: Easing.OutCubic
+    //     }
+    //   }
+    // }
   }
 }
