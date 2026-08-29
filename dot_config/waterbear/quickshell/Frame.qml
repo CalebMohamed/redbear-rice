@@ -7,7 +7,7 @@ import QtQuick.Controls
 import qs as Shell
 import WallustTheme
 
-import "./Widgets"
+import "./Widgets/Common"
 
 Scope {
   id: root
@@ -51,10 +51,10 @@ Scope {
   // =========================
 
   readonly property var corners: [
-    { top: true,  bottom: false, right: false, left: true,  rotation: 0 },
-    { top: true,  bottom: false, right: true, left: false,  rotation: 90 },
-    { top: false,  bottom: true, right: true, left: false,  rotation: 180 },
-    { top: false,  bottom: true, right: false, left: true,  rotation: 270 },
+    { top: true,  bottom: false, right: false, left: true,  rotation: 90 },
+    { top: true,  bottom: false, right: true, left: false,  rotation: 180 },
+    { top: false,  bottom: true, right: true, left: false,  rotation: 270 },
+    { top: false,  bottom: true, right: false, left: true,  rotation: 0 },
   ]
 
   Variants {
@@ -67,8 +67,8 @@ Scope {
       exclusionMode: ExclusionMode.Ignore
       color: "transparent"
 
-      implicitWidth: Shell.Style.borderSize + Shell.Style.cornerRadius
-      implicitHeight: Shell.Style.borderSize + Shell.Style.cornerRadius
+      implicitWidth: Shell.Style.cornerRadius
+      implicitHeight: Shell.Style.cornerRadius
 
       anchors {
         top: modelData.top
@@ -77,12 +77,18 @@ Scope {
         right: modelData.right
       }
 
+      margins {
+        top: modelData.top ? Shell.Style.borderSize : 0
+        bottom: modelData.bottom ? Shell.Style.borderSize : 0
+        left: modelData.left ? Shell.Style.borderSize : 0
+        right: modelData.right ? Shell.Style.borderSize : 0
+      }
+
       BevelCorner {
         anchors.fill: parent
+        transformOrigin: Item.Center
         rotation: modelData.rotation
-        borderWidth: Shell.Style.borderSize
-        radius: Shell.Style.cornerRadius
-        color: root.borderColor
+        colour: root.borderColor
       }
     }
   }
