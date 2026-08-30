@@ -36,11 +36,9 @@ Row {
       Behavior on color { ColorAnimation { duration: 300 } }
 
       // dynamic color based on state
-      color: {
-        if (isFocused) return Colors.accent;
-        if (isPopulated) return Colors.textMuted;
-        return Colors.backgroundAlt;                       
-      }
+      color: isFocused ? Colors.accent
+        : isPopulated ? Colors.textMuted
+        : Colors.backgroundAlt;
     }
   }
 }

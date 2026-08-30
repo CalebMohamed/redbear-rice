@@ -10,14 +10,9 @@ Singleton {
   property int current: 0
   property int maximum: 0
 
-  readonly property real value:
-  maximum > 0 ? current / maximum : 0
-
-  readonly property int percentage:
-  Math.round(value * 100)
-
-  readonly property bool available:
-  maximum > 0
+  readonly property real value: maximum > 0 ? current / maximum : 0
+  readonly property int percentage: Math.round(value * 100)
+  readonly property bool available: maximum > 0
 
   Process {
     id: getBrightness
@@ -28,11 +23,11 @@ Singleton {
       onStreamFinished: {
         const fields = text.trim().split(",")
 
-        if (fields.length < 6)
+        if (fields.length < 5)
         return
 
-        const newCurrent = Number(fields[4])
-        const newMaximum = Number(fields[5])
+        const newCurrent = Number(fields[2])
+        const newMaximum = Number(fields[4])
 
         if (isNaN(newCurrent) || isNaN(newMaximum))
         return
@@ -45,6 +40,10 @@ Singleton {
 
   Process {
     id: adjustBrightness
+
+    onExited: {
+      root.refresh()
+    }
   }
 
   function refresh(): void {
@@ -59,8 +58,6 @@ Singleton {
         `${Math.abs(delta)}%${delta >= 0 ? "+" : "-"}`
       ]
     })
-
-    refresh()
   }
 
   function brightnessUp(): void {
@@ -81,9 +78,9 @@ Singleton {
         `${clamped}%`
       ]
     })
-
-    refresh()
   }
 
-  Component.onCompleted: refresh()
+  Component.onCompleted: {
+    refresh()
+  }
 }

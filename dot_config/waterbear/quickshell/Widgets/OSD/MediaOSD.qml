@@ -24,8 +24,8 @@ EdgePopup {
 
   open: false
   edge: EdgePopup.Right
-  popupWidth: Shell.Style.uiFont.pixelSize * 4
-  popupHeight: Shell.Style.iconFont.pixelSize * 16
+  popupWidth: Shell.Style.uiFont.pixelSize * 2
+  popupHeight: content.implicitHeight
 
   enum Kind {
     Volume,
@@ -70,53 +70,57 @@ EdgePopup {
   }
 
   ColumnLayout {
-    anchors.fill: parent
-    // anchors.margins: Shell.Style.uiFont.pixelSize * 0.8
+    id: content
 
-    spacing: Shell.Style.iconFont.pixelSize * 4
+    anchors.fill: parent
+    spacing: Shell.Style.iconFont.pixelSize
 
     Text {
       Layout.alignment: Qt.AlignHCenter
+      Layout.topMargin: Shell.Style.iconFont.pixelSize
 
       text: {
         var audioPercent = Audio.percentage
         var brightnessPercent = Brightness.percentage
 
-        if (root.kind === MediaOSD.Kind.Brightness)
-        return brightnessPercent > 90 ? "󰃠"
-        : brightnessPercent > 90 ? "󰃠"
-        : brightnessPercent > 70 ? "󰃠"
-        : brightnessPercent > 50 ? "󰃠"
-        : brightnessPercent > 30 ? "󰃠"
-        : brightnessPercent > 10 ? "󰃠"
-        : "󰃠"
+        if (root.kind === MediaOSD.Kind.Brightness) {
+          return brightnessPercent> 80 ? "󰃠"
+          : brightnessPercent > 60 ? "󰃟"
+          : brightnessPercent > 40 ? "󰃞"
+          : brightnessPercent > 20 ? "󰃝"
+          : "󰃚"
+        }
 
+        // I want to use more but couldn't find consistent ones
         return Audio.muted ? "󰝟"
-        : Audio.percentage === 0 ? "󰖁"
-        : Audio.percentage < 50 ? "󰕿"
+        : audioPercent === 0 ? "󰖁"
         : "󰕾"
       }
 
-      font.family: Shell.Style.iconFont.family
-      font.pixelSize: Shell.Style.iconFont.pixelSize * 1.5
       color: Colors.text
+      font: Shell.Style.uiFont
     }
 
-    Item {
-      Layout.fillWidth: true
-      Layout.fillHeight: true
+    Rectangle {
+      Layout.alignment: Qt.AlignHCenter
+      width: Shell.Style.uiFont.pixelSize * 0.5
+      height: Shell.Style.uiFont.pixelSize * 10
+      radius: width / 2
+      color: Colors.backgroundAlt
 
       Rectangle {
-        width: Shell.Style.uiFont * 0.5
+        anchors.bottom: parent.bottom
+
+        width: parent.width
         height: parent.height * (
           root.kind === MediaOSD.Kind.Brightness
           ? Brightness.value
           : Math.min(Audio.volume, 1)
         ) 
-        radius: width / 2
+        radius: parent.width
         color: Colors.accent
 
-        Behavior on width {
+        Behavior on height {
           NumberAnimation {
             duration: 100
             easing.type: Easing.OutCubic
@@ -127,14 +131,14 @@ EdgePopup {
 
     Text {
       Layout.alignment: Qt.AlignHCenter
+      Layout.bottomMargin: Shell.Style.iconFont.pixelSize
 
       text: root.kind === MediaOSD.Kind.Brightness
-      ? `${Brightness.percentage}%`
-      : `${Audio.percentage}%`
+      ? Brightness.percentage
+      : Audio.percentage
 
-      font.family: Shell.Style.iconFont.family
-      font.pixelSize: Shell.Style.iconFont.pixelSize
       color: Colors.text
+      font: Shell.Style.uiFont
     }
   }
 

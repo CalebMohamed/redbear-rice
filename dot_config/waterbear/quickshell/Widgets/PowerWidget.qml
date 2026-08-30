@@ -8,21 +8,6 @@ Text {
   property bool expanded: false
   property bool highlight: false
 
-  // function powerIcon(p, charging) {
-  //   return p === null ? ""
-  //     : charging ? ""
-  //     : p < 10 ? "󰁺"
-  //     : p < 20 ? "󰁻"  
-  //     : p < 30 ? "󰁼"
-  //     : p < 40 ? "󰁽"
-  //     : p < 50 ? "󰁾"
-  //     : p < 60 ? "󰁿"
-  //     : p < 70 ? "󰂀"
-  //     : p < 80 ? "󰂁"
-  //     : p < 90 ? "󰂂"
-  //     : "󰁹"
-  // }
-
   function powerIcon(p, charging) {
     return p === null ? ""
       : charging ? ""
@@ -42,16 +27,16 @@ Text {
   }
 
   text: {
-    const icon = powerIcon(Power.energy, Power.charging)
+    const icon = powerIcon(Power.percentage, Power.charging)
 
     if (!expanded)
     return icon
 
-    return `${icon} ${Power.energy === null ? "N/A" : `${Power.energy}%`}`
+    return `${icon} ${Power.energy === null ? "N/A" : `${Power.percentage}%`}`
   }
 
   font: Shell.Style.uiFont
-  color: powerColor(Power.energy, Power.charging)
+  color: powerColor(Power.percentage, Power.charging)
 
   MouseArea { 
     anchors.fill: parent 

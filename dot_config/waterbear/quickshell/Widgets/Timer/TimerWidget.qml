@@ -48,7 +48,7 @@ Item {
     popupWidth: Shell.Style.iconFont.pixelSize * 6
     popupHeight: Shell.Style.iconFont.pixelSize * 6
 
-    edge: EdgePopup.Right
+    edge: EdgePopup.Bottom
 
     ColumnLayout {
       id: content

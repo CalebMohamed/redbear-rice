@@ -130,19 +130,15 @@ Scope {
       }
     }
 
-    // bottom right widgets
+    // bottom middle widgets
     Item {
-      anchors {
-        right: parent.right
-        verticalCenter: parent.verticalCenter
-        rightMargin: Shell.Style.borderSize + Shell.Style.cornerRadius + 30
-      }
+      anchors.centerIn: parent
 
-      width: brWidgets.width
-      height: brWidgets.height
+      width: bmWidgets.width
+      height: bmWidgets.height
 
       RowLayout {
-        id: brWidgets
+        id: bmWidgets
         anchors.centerIn: parent
         spacing: 12
 
