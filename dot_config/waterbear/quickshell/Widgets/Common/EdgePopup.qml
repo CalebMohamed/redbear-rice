@@ -47,6 +47,11 @@ PanelWindow {
   implicitWidth: horizontal ? popupWidth : popupWidth + corner * 2
   implicitHeight: horizontal ? popupHeight + corner * 2 : popupHeight
 
+  // removed mouse interaction when closed
+  mask: Region {
+    item: root.open ? popupContent : null
+  }
+
   Rectangle {
     id: popupContent
 
@@ -159,32 +164,6 @@ PanelWindow {
         easing.type: Easing.OutCubic
       }
     }
-
-    // Behavior on x {
-    //   SequentialAnimation {
-    //     PauseAnimation {
-    //       duration: root.open ? 100 : 0
-    //     }
-
-    //     NumberAnimation {
-    //       duration: 100
-    //       easing.type: Easing.OutCubic
-    //     }
-    //   }
-    // }
-
-    // Behavior on y {
-    //   SequentialAnimation {
-    //     PauseAnimation {
-    //       duration: root.open ? 100 : 0
-    //     }
-
-    //     NumberAnimation {
-    //       duration: 100
-    //       easing.type: Easing.OutCubic
-    //     }
-    //   }
-    // }
   }
 
   // Trailing bevel
@@ -239,31 +218,6 @@ PanelWindow {
         easing.type: Easing.OutCubic
       }
     }
-
-    // Behavior on x {
-    //   SequentialAnimation {
-    //     PauseAnimation {
-    //       duration: root.open ? 100 : 0
-    //     }
-
-    //     NumberAnimation {
-    //       duration: 100
-    //       easing.type: Easing.OutCubic
-    //     }
-    //   }
-    // }
-
-    // Behavior on y {
-    //   SequentialAnimation {
-    //     PauseAnimation {
-    //       duration: root.open ? 100 : 0
-    //     }
-
-    //     NumberAnimation {
-    //       duration: 100
-    //       easing.type: Easing.OutCubic
-    //     }
-    //   }
-    // }
   }
+
 }

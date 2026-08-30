@@ -1,10 +1,13 @@
+import QtQuick
 import QtQml
+
 import Quickshell
 import Quickshell.Io
-import "./Services"
-
-import QtQuick
 import Quickshell.Networking
+
+import "./Services"
+import "./Widgets/OSD"
+
 
 Scope {
   // this is for the wallust triggered reloads
@@ -13,6 +16,35 @@ Scope {
 
     function reload(): void {
       Quickshell.reload(false)
+    }
+  }
+
+  IpcHandler {
+    target: "osd"
+
+    function volumeUp(): void {
+      Audio.volumeUp()
+      OSD.showVolume()
+    }
+
+    function volumeDown(): void {
+      Audio.volumeDown()
+      OSD.showVolume()
+    }
+
+    function volumeMute(): void {
+      Audio.toggleMute()
+      OSD.showVolume()
+    }
+
+    function brightnessUp(): void {
+      Brightness.brightnessUp()
+      OSD.showBrightness()
+    }
+
+    function brightnessDown(): void {
+      Brightness.brightnessDown()
+      OSD.showBrightness()
     }
   }
 
@@ -28,18 +60,20 @@ Scope {
   Variants {
     model: Quickshell.screens
 
-    Frame {
+    Scope {
       required property var modelData
-      screen: modelData
-    }
-  }
 
-  Variants {
-    model: Quickshell.screens
+      Frame {
+        screen: modelData
+      }
 
-    FrameWidgets {
-      required property var modelData
-      screen: modelData
+      FrameWidgets {
+        screen: modelData
+      }
+
+      MediaOSD {
+        screen: modelData
+      }
     }
   }
 }

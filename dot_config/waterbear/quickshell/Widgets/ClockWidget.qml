@@ -32,7 +32,7 @@ Text {
     onCloseRequested: root.popupOpen = false
 
     popupWidth: Shell.Style.uiFont.pixelSize * 16
-    popupHeight: Shell.Style.uiFont.pixelSize * 1.5
+    popupHeight: Shell.Style.uiFont.pixelSize * 1.25
 
     edge: EdgePopup.Top
 
