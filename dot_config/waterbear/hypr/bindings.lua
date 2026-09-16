@@ -16,12 +16,11 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
--- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
--- hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu))
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("ls $HOME/pictures/wallpapers | wmenu-pretty -p 'select wallpaper' -l 5 -i | xargs -I {} set-background '{}'"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("ls $HOME/pictures/wallpapers | wmenu-pretty -p 'select wallpaper' -l 10 -i | xargs -I {} set-background '{}'"))
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("waterbear-lock"))
 
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 -- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
@@ -41,9 +40,9 @@ hl.bind(mainMod .. " + SHIFT + J",  hl.dsp.window.swap({ direction = "down" }))
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
 for i = 1, 10 do
-    local key = i % 10 -- 10 maps to key 0
-    hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
-    hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
+  local key = i % 10 -- 10 maps to key 0
+  hl.bind(mainMod .. " + " .. key,             hl.dsp.focus({ workspace = i}))
+  hl.bind(mainMod .. " + SHIFT + " .. key,     hl.dsp.window.move({ workspace = i }))
 end
 
 -- Example special workspace (scratchpad)
@@ -77,25 +76,25 @@ hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = tr
 
 -- -- terminal
 -- bind("SUPER SHIFT", "RETURN", function()
---   exec("foot")
--- end)
---
--- -- app launcher
--- bind("SUPER", "P", function()
---   exec("wmenu-pretty --run")
--- end)
---
--- -- close window
--- bind("SUPER SHIFT", "C", function()
---   active.kill()
--- end)
---
--- -- reload config
--- bind("SUPER SHIFT", "R", function()
---   hyprctl("reload")
--- end)
---
--- -- exit hyprland
--- bind("SUPER SHIFT", "Q", function()
---   exec("hyprshutdown")
--- end)
+  --   exec("foot")
+  -- end)
+  --
+  -- -- app launcher
+  -- bind("SUPER", "P", function()
+    --   exec("wmenu-pretty --run")
+    -- end)
+    --
+    -- -- close window
+    -- bind("SUPER SHIFT", "C", function()
+      --   active.kill()
+      -- end)
+      --
+      -- -- reload config
+      -- bind("SUPER SHIFT", "R", function()
+        --   hyprctl("reload")
+        -- end)
+        --
+        -- -- exit hyprland
+        -- bind("SUPER SHIFT", "Q", function()
+          --   exec("hyprshutdown")
+          -- end)

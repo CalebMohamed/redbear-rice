@@ -146,4 +146,40 @@ Scope {
       }
     }
   }
+
+  // left border overlay
+  PanelWindow {
+    id: lwidgets
+    screen: root.screen
+
+    anchors {
+      top: true
+      bottom: true
+      left: true
+    }
+
+    implicitWidth: Shell.Style.borderSize
+    exclusionMode: ExclusionMode.Ignore
+    color: "transparent"
+
+    // left top widgets
+    Item {
+      anchors {
+        horizontalCenter: parent.horizontalCenter
+        top: parent.top
+        topMargin: Shell.Style.borderSize + Shell.Style.cornerRadius
+      }
+
+      width: ltWidgets.width
+      height: ltWidgets.height
+
+      RowLayout {
+        id: ltWidgets
+        anchors.centerIn: parent
+        spacing: 12
+
+        TrayWidget{}
+      }
+    }
+  }
 }

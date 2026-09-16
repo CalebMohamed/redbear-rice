@@ -27,3 +27,20 @@ Type=Application
 ## Packages 
 I will continue to add to this and plan to write an 
 installer in the future for each profile.
+
+## Waterbear
+For waterbear you need to add:
+
+```
+/etc/pam.d/quickshell-lock:
+
+auth required pam_unix.so
+
+/etc/systemd/logind.conf.d/lid.conf
+[Login]
+HandleLidSwitch=ignore
+HandleLidSwitchExternalPower=ignore
+HandleLidSwitchDocked=ignore
+```
+
+And note that the lid.conf disables the lid for all sessions!
