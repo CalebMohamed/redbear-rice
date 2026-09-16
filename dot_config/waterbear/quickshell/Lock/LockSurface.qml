@@ -1,8 +1,12 @@
 import QtQuick
+import QtQuick.Controls
+
 import Quickshell
 import Quickshell.Wayland
 import WallustTheme
 import qs as Shell
+
+import "../Widgets/"
 
 WlSessionLockSurface {
   id: root
@@ -103,6 +107,7 @@ WlSessionLockSurface {
         root.submit(text)
         clear()
       }
+
     }
 
     Text {
@@ -132,25 +137,24 @@ WlSessionLockSurface {
     }
   }
 
-    Text {
-      anchors {
-        left: parent.left
-        bottom: parent.bottom
-        leftMargin: 60
-        bottomMargin: 60
-      }
-
-      width: parent.width
-      height: Shell.Style.passwordFont.pixelSize
-
-      horizontalAlignment: TextInput.AlignLeft
-      verticalAlignment: TextInput.AlignVCenter
-
-      text: `${Quickshell.env("USER")}`
-      font: Shell.Style.passwordFont
-      color: Colors.text
+  Text {
+    anchors {
+      left: parent.left
+      bottom: parent.bottom
+      leftMargin: 60
+      bottomMargin: 60
     }
 
+    width: parent.width
+    height: Shell.Style.passwordFont.pixelSize
+
+    horizontalAlignment: TextInput.AlignLeft
+    verticalAlignment: TextInput.AlignVCenter
+
+    text: `${Quickshell.env("USER")}`
+    font: Shell.Style.passwordFont
+    color: Colors.text
+  }
 
   Component.onCompleted: {
     if (root.secure)
