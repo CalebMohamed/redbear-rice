@@ -1,6 +1,6 @@
 import QtQuick
+import Quickshell
 import Quickshell.Wayland
-
 import WallustTheme
 import qs as Shell
 
@@ -16,20 +16,71 @@ WlSessionLockSurface {
   color: Colors.background
 
   Column {
-    anchors.centerIn: parent
-    width: Math.min(parent.width - 48, 420)
-    spacing: 20
+    anchors {
+      verticalCenter: parent.verticalCenter
+      left: parent.left
+      leftMargin: 60
+    }
+
+    width: Math.min(parent.width - 60, 420)
+    spacing: 10
 
     Clock {}
+
+    Row {
+      height: Shell.Style.passwordFont.pixelSize * 2
+      width: Shell.Style.passwordFont.pixelSize * 9
+      spacing: Shell.Style.passwordFont.pixelSize
+
+      Rectangle {
+        width: Shell.Style.passwordFont.pixelSize
+        height: width
+        radius: width / 2
+
+        color: Colors.bright1
+      }
+
+      Rectangle {
+        width: Shell.Style.passwordFont.pixelSize
+        height: width
+        radius: width / 2
+
+        color: Colors.bright3
+      }
+
+      Rectangle {
+        width: Shell.Style.passwordFont.pixelSize
+        height: width
+        radius: width / 2
+
+        color: Colors.bright4
+      }
+
+      Rectangle {
+        width: Shell.Style.passwordFont.pixelSize
+        height: width
+        radius: width / 2
+
+        color: Colors.bright5
+      }
+
+      Rectangle {
+        width: Shell.Style.passwordFont.pixelSize
+        height: width
+        radius: width / 2
+
+        color: Colors.text
+      }
+    }
 
     TextInput {
       id: passwordInput
 
       width: parent.width
-      height: 52
+      height: Shell.Style.passwordFont.pixelSize
 
       echoMode: TextInput.Password
-      horizontalAlignment: TextInput.AlignHCenter
+      horizontalAlignment: TextInput.AlignLeft
       verticalAlignment: TextInput.AlignVCenter
 
       color: Colors.text
@@ -80,6 +131,26 @@ WlSessionLockSurface {
       visible: text.length > 0
     }
   }
+
+    Text {
+      anchors {
+        left: parent.left
+        bottom: parent.bottom
+        leftMargin: 60
+        bottomMargin: 60
+      }
+
+      width: parent.width
+      height: Shell.Style.passwordFont.pixelSize
+
+      horizontalAlignment: TextInput.AlignLeft
+      verticalAlignment: TextInput.AlignVCenter
+
+      text: `${Quickshell.env("USER")}`
+      font: Shell.Style.passwordFont
+      color: Colors.text
+    }
+
 
   Component.onCompleted: {
     if (root.secure)

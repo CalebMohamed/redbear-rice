@@ -11,7 +11,7 @@ Text {
   }
 
   width: parent.width
-  horizontalAlignment: Text.AlignHCenter
+  horizontalAlignment: Text.AlignLeft
 
   text: Qt.formatDateTime(clock.date, "HH:mm")
 

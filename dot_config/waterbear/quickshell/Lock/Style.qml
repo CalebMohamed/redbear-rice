@@ -5,7 +5,7 @@ import QtQuick
 QtObject {
   readonly property font clockFont: Qt.font({
     family: "CaskaydiaCove NFM",
-    pointSize: 32
+    pointSize: 64
   })
 
   readonly property font passwordFont: Qt.font({
