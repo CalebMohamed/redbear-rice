@@ -145,6 +145,26 @@ Scope {
         TimerWidget{}
       }
     }
+
+    // bottom right widgets
+    Item {
+      anchors {
+        right: parent.right
+        verticalCenter: parent.verticalCenter
+        rightMargin: Shell.Style.borderSize + Shell.Style.cornerRadius
+      }
+
+      width: brWidgets.width
+      height: brWidgets.height
+
+      RowLayout {
+        id: brWidgets
+        anchors.centerIn: parent
+        spacing: 12
+
+        NotificationWidget {}
+      }
+    }
   }
 
   // left border overlay
