@@ -7,7 +7,7 @@ import Quickshell.Networking
 
 import "./Services"
 import "./Widgets/OSD"
-
+import "./Modules/notifications"
 
 Scope {
   // this is for the wallust triggered reloads
@@ -55,6 +55,26 @@ Scope {
     function onReloadCompleted(): void {
       Quickshell.inhibitReloadPopup()
     }
+  }
+
+  IpcHandler {
+    target: "notifications"
+
+    function toggle() {
+      NotificationService.toggleCentre()
+    }
+
+    function open() {
+      NotificationService.openCentre()
+    }
+
+    function close() {
+      NotificationService.closeCentre()
+    }
+  }
+
+  NotificationCentre {
+    screen: NotificationService.centreScreen
   }
 
   Variants {

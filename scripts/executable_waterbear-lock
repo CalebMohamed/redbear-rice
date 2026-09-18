@@ -1,2 +1,2 @@
 #!/bin/sh
-exec qs -c "$HOME/.config/waterbear/quickshell/Lock"
+exec qs -c "$HOME/.config/waterbear/quickshell/Modules/Lock"
