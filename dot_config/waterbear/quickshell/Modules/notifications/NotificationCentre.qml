@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 
+import qs as Shell
 import WallustTheme
 import "../../Widgets/Common"
 
@@ -9,7 +10,6 @@ PanelWindow {
   id: root
 
   property int selectedIndex: 0
-  property int rowHeight: 110
 
   visible: NotificationService.centreOpen
   focusable: NotificationService.centreOpen
@@ -26,9 +26,9 @@ PanelWindow {
 
   WlrLayershell.layer: WlrLayer.Overlay
   WlrLayershell.keyboardFocus:
-  NotificationService.centreOpen
-  ? WlrKeyboardFocus.Exclusive
-  : WlrKeyboardFocus.None
+    NotificationService.centreOpen
+      ? WlrKeyboardFocus.Exclusive
+      : WlrKeyboardFocus.None
 
   color: "transparent"
 
@@ -45,71 +45,74 @@ PanelWindow {
     Keys.onPressed: event => {
       switch (event.key) {
         case Qt.Key_Escape:
-        NotificationService.closeCentre()
-        event.accepted = true
-        break
+          NotificationService.closeCentre()
+          event.accepted = true
+          break
 
         case Qt.Key_Up:
         case Qt.Key_K:
-        moveSelection(-1)
-        event.accepted = true
-        break
+          moveSelection(-1)
+          event.accepted = true
+          break
 
         case Qt.Key_Down:
         case Qt.Key_J:
-        moveSelection(1)
-        event.accepted = true
-        break
+          moveSelection(1)
+          event.accepted = true
+          break
 
         case Qt.Key_Home:
-        if (list.count > 0)
-        list.currentIndex = 0
-        event.accepted = true
-        break
+          if (list.count > 0)
+            list.currentIndex = 0
+          event.accepted = true
+          break
 
         case Qt.Key_End:
-        if (list.count > 0)
-        list.currentIndex = list.count - 1
-        event.accepted = true
-        break
+          if (list.count > 0)
+            list.currentIndex = list.count - 1
+          event.accepted = true
+          break
 
         case Qt.Key_R:
-        toggleSelectedRead()
-        event.accepted = true
-        break
+          toggleSelectedRead()
+          event.accepted = true
+          break
 
         case Qt.Key_U:
-        toggleSelectedUrgent()
-        event.accepted = true
-        break
+          toggleSelectedUrgent()
+          event.accepted = true
+          break
 
         case Qt.Key_D:
-        case Qt.Key_Delete:
-        if (event.modifiers & Qt.ControlModifier) {
-          NotificationService.clearDismissed()
-        } else {
-          dismissSelected()
-        }
+          if (event.modifiers & Qt.ControlModifier) {
+            NotificationService.clearDismissed()
+          } else {
+            dismissSelected()
+          }
+          event.accepted = true
+          break
 
-        event.accepted = true
-        break
+        case Qt.Key_Delete:
+          dismissSelected()
+          event.accepted = true
+          break
 
         case Qt.Key_H:
-        toggleHistory()
-        event.accepted = true
-        break
+          toggleHistory()
+          event.accepted = true
+          break
 
         case Qt.Key_Return:
         case Qt.Key_Enter:
-        activateSelected()
-        event.accepted = true
-        break
+          activateSelected()
+          event.accepted = true
+          break
       }
     }
 
     function moveSelection(delta) {
       if (list.count === 0)
-      return
+        return
 
       list.currentIndex = Math.max(
         0,
@@ -121,28 +124,34 @@ PanelWindow {
     }
 
     function selectedRecord() {
-      if (list.currentIndex < 0 || list.currentIndex >= list.count)
-      return null
+      if (
+        list.currentIndex < 0
+        || list.currentIndex >= list.count
+      )
+        return null
 
       return NotificationService.model.values[list.currentIndex]
     }
 
     function toggleSelectedRead() {
       const record = selectedRecord()
+
       if (record)
-      NotificationService.toggleRead(record.recordId)
+        NotificationService.toggleRead(record.recordId)
     }
 
     function toggleSelectedUrgent() {
       const record = selectedRecord()
+
       if (record)
-      NotificationService.toggleUrgent(record.recordId)
+        NotificationService.toggleUrgent(record.recordId)
     }
 
     function dismissSelected() {
       const record = selectedRecord()
+
       if (!record)
-      return
+        return
 
       if (record.dismissed) {
         NotificationService.restoreFromHistory(record.recordId)
@@ -164,19 +173,19 @@ PanelWindow {
 
     function toggleHistory() {
       NotificationService.showDismissed =
-      !NotificationService.showDismissed
+        !NotificationService.showDismissed
 
       root.selectedIndex = list.count > 0 ? 0 : -1
 
       if (list.count > 0)
-      list.currentIndex = 0
+        list.currentIndex = 0
     }
 
     function activateSelected() {
       const record = selectedRecord()
 
       if (!record || !record.live)
-      return
+        return
 
       if (record.actions.length > 0) {
         NotificationService.invokeAction(
@@ -193,8 +202,9 @@ PanelWindow {
 
   Rectangle {
     anchors.fill: parent
-    color: Colors.background
-    opacity: 0.85
+
+    color: Colors.accent
+    opacity: 0.25
 
     MouseArea {
       anchors.fill: parent
@@ -209,30 +219,24 @@ PanelWindow {
   Rectangle {
     id: panel
 
-    width: Math.min(parent.width * 0.42, 720)
+    width: Math.min(parent.width * 0.40, 720)
 
     anchors {
       top: parent.top
       right: parent.right
       bottom: parent.bottom
 
-      topMargin: 24
-      rightMargin: 24
-      bottomMargin: 24
+      topMargin: 15 + Shell.Style.borderSize
+      rightMargin: 15 + Shell.Style.borderSize
+      bottomMargin: 15 + Shell.Style.borderSize
     }
 
-    radius: 16
-
-    color: Colors.backgroundAlt
-    border.width: 1
-    border.color: Colors.text
-
-    opacity: 0.98
+    radius: Shell.Style.cornerRadius
+    color: Colors.background
 
     MouseArea {
       anchors.fill: parent
 
-      // Consume clicks so that they don't hit the backdrop.
       onClicked: mouse => mouse.accepted = true
     }
 
@@ -254,12 +258,11 @@ PanelWindow {
           anchors.verticalCenter: parent.verticalCenter
 
           text: NotificationService.showDismissed
-          ? "Notification history"
-          : "Notifications"
+            ? "notification history"
+            : "notifications"
 
           color: Colors.text
-          font.pixelSize: 22
-          font.bold: true
+          font: Shell.Style.h1Font
         }
 
         Row {
@@ -270,12 +273,14 @@ PanelWindow {
 
           ActionText {
             text: NotificationService.showDismissed
-            ? "󰁪 Active"
-            : "󰈙 History"
+              ? "󰁪 active"
+              : "󰈙 history"
 
             textItem.color: hovered
-            ? Colors.text
-            : Colors.textMuted
+              ? Colors.text
+              : Colors.textMuted
+
+            textItem.font: Shell.Style.uiFont
 
             onClicked: toggleHistory()
           }
@@ -283,11 +288,13 @@ PanelWindow {
           ActionText {
             visible: NotificationService.showDismissed
 
-            text: "󰆴 Clear"
+            text: "󰆴 clear"
 
             textItem.color: hovered
-            ? Colors.urgent
-            : Colors.textMuted
+              ? Colors.urgent
+              : Colors.textMuted
+
+            textItem.font: Shell.Style.uiFont
 
             onClicked: NotificationService.clearDismissed()
           }
@@ -302,15 +309,15 @@ PanelWindow {
         width: parent.width
 
         text: NotificationService.showDismissed
-        ? `${NotificationService.allNotifications.length} notifications`
-        : `${NotificationService.records.filter(
-          function(record) {
-            return !record.dismissed
-          }
-        ).length} active notifications`
+          ? `${NotificationService.allNotifications.length} notifications`
+          : `${NotificationService.records.filter(
+              function(record) {
+                return !record.dismissed
+              }
+            ).length} active notifications`
 
         color: Colors.textMuted
-        font.pixelSize: 13
+        font: Shell.Style.uiFont
       }
 
       // -----------------------------------------------------------------------
@@ -334,11 +341,12 @@ PanelWindow {
         onCurrentIndexChanged: {
           root.selectedIndex = currentIndex
 
-          if (currentIndex >= 0)
-          positionViewAtIndex(
-            currentIndex,
-            ListView.Contain
-          )
+          if (currentIndex >= 0) {
+            positionViewAtIndex(
+              currentIndex,
+              ListView.Contain
+            )
+          }
         }
 
         delegate: Rectangle {
@@ -348,19 +356,21 @@ PanelWindow {
           required property int index
 
           width: list.width
-          height: root.rowHeight
+
+          // The delegate now grows with its contents.
+          height: content.implicitHeight + 24
 
           radius: 10
 
           color: list.currentIndex === index
-          ? Colors.background
-          : Colors.backgroundAlt
+            ? Colors.background
+            : Colors.backgroundAlt
 
           border.width: modelData.urgent ? 2 : 1
 
           border.color: modelData.urgent
-          ? Colors.urgent
-          : Colors.text
+            ? Colors.urgent
+            : Colors.text
 
           // -------------------------------------------------------------------
           // Selection
@@ -371,7 +381,8 @@ PanelWindow {
             hoverEnabled: true
 
             onClicked: {
-              list.currentIndex = notificationDelegate.index
+              list.currentIndex =
+                notificationDelegate.index
             }
           }
 
@@ -380,12 +391,20 @@ PanelWindow {
           // -------------------------------------------------------------------
 
           Column {
-            anchors.fill: parent
-            anchors.margins: 12
+            id: content
+
+            anchors {
+              left: parent.left
+              right: parent.right
+              top: parent.top
+              margins: 12
+            }
 
             spacing: 5
 
-            // Metadata ----------------------------------------------------------
+            // -----------------------------------------------------------------
+            // Metadata
+            // -----------------------------------------------------------------
 
             Row {
               width: parent.width
@@ -395,39 +414,43 @@ PanelWindow {
                 text: notificationDelegate.modelData.appName
 
                 color: Colors.textMuted
-                font.pixelSize: 12
+                font: Shell.Style.uiFont
               }
 
               Text {
-                visible: !notificationDelegate.modelData.read
+                visible:
+                  !notificationDelegate.modelData.read
 
                 text: "• unread"
 
                 color: Colors.accent
-                font.pixelSize: 12
+                font: Shell.Style.uiFont
               }
 
               Text {
-                visible: notificationDelegate.modelData.urgent
+                visible:
+                  notificationDelegate.modelData.urgent
 
                 text: "󰀦 urgent"
 
                 color: Colors.urgent
-                font.pixelSize: 12
-                font.bold: true
+                font: Shell.Style.uiFont
               }
 
               Text {
-                visible: notificationDelegate.modelData.dismissed
+                visible:
+                  notificationDelegate.modelData.dismissed
 
                 text: "󰈆 dismissed"
 
                 color: Colors.text
-                font.pixelSize: 12
+                font: Shell.Style.uiFont
               }
             }
 
-            // Summary -----------------------------------------------------------
+            // -----------------------------------------------------------------
+            // Summary
+            // -----------------------------------------------------------------
 
             Text {
               width: parent.width
@@ -435,14 +458,14 @@ PanelWindow {
               text: notificationDelegate.modelData.summary
 
               color: Colors.text
+              font: Shell.Style.h2Font
 
-              font.pixelSize: 15
-              font.bold: true
-
-              elide: Text.ElideRight
+              wrapMode: Text.Wrap
             }
 
-            // Body --------------------------------------------------------------
+            // -----------------------------------------------------------------
+            // Body
+            // -----------------------------------------------------------------
 
             Text {
               width: parent.width
@@ -450,57 +473,63 @@ PanelWindow {
               text: notificationDelegate.modelData.body
 
               color: Colors.textMuted
+              font: Shell.Style.contentFont
 
-              font.pixelSize: 13
+              wrapMode: Text.Wrap
 
-              maximumLineCount: 2
+              // Prevent an absurdly large notification from taking
+              // over the entire centre.
+              maximumLineCount: 5
               elide: Text.ElideRight
             }
 
-            // Actions -----------------------------------------------------------
+            // -----------------------------------------------------------------
+            // Actions
+            // -----------------------------------------------------------------
 
-            Row {
+            Flow {
               width: parent.width
+
               spacing: 10
 
               ActionText {
                 text: notificationDelegate.modelData.read
-                ? "󰈇"
-                : "󰈈"
+                  ? "󰈇"
+                  : "󰈈"
 
                 textItem.color: hovered
-                ? Colors.text
-                : Colors.textMuted
+                  ? Colors.text
+                  : Colors.textMuted
 
                 onClicked:
-                NotificationService.toggleRead(
-                  notificationDelegate.modelData.recordId
-                )
+                  NotificationService.toggleRead(
+                    notificationDelegate.modelData.recordId
+                  )
               }
 
               ActionText {
                 text: notificationDelegate.modelData.urgent
-                ? "󰂛"
-                : "󰂚"
+                  ? "󰂛"
+                  : "󰂚"
 
                 textItem.color: hovered
-                ? Colors.urgent
-                : Colors.textMuted
+                  ? Colors.urgent
+                  : Colors.textMuted
 
                 onClicked:
-                NotificationService.toggleUrgent(
-                  notificationDelegate.modelData.recordId
-                )
+                  NotificationService.toggleUrgent(
+                    notificationDelegate.modelData.recordId
+                  )
               }
 
               ActionText {
                 text: notificationDelegate.modelData.dismissed
-                ? "󰁍"
-                : "󰆴"
+                  ? "󰁍"
+                  : "󰆴"
 
                 textItem.color: hovered
-                ? Colors.text
-                : Colors.textMuted
+                  ? Colors.text
+                  : Colors.textMuted
 
                 onClicked: {
                   if (
@@ -518,9 +547,10 @@ PanelWindow {
               }
 
               Repeater {
-                model: notificationDelegate.modelData.live
-                ? notificationDelegate.modelData.actions
-                : notificationDelegate.modelData.actionData
+                model:
+                  notificationDelegate.modelData.live
+                    ? notificationDelegate.modelData.actions
+                    : notificationDelegate.modelData.actionData
 
                 delegate: ActionText {
                   required property var modelData
@@ -528,17 +558,17 @@ PanelWindow {
                   text: modelData.text
 
                   enabled:
-                  notificationDelegate.modelData.live
+                    notificationDelegate.modelData.live
 
                   textItem.color: hovered
-                  ? Colors.text
-                  : Colors.textMuted
+                    ? Colors.text
+                    : Colors.textMuted
 
                   onClicked:
-                  NotificationService.invokeAction(
-                    notificationDelegate.modelData.recordId,
-                    modelData.identifier
-                  )
+                    NotificationService.invokeAction(
+                      notificationDelegate.modelData.recordId,
+                      modelData.identifier
+                    )
                 }
               }
             }
@@ -554,13 +584,14 @@ PanelWindow {
 
   onVisibleChanged: {
     if (visible) {
-      root.selectedIndex = list.count > 0 ? 0 : -1
+      root.selectedIndex =
+        list.count > 0 ? 0 : -1
 
       Qt.callLater(function() {
         keyboardScope.forceActiveFocus()
 
         if (list.count > 0)
-        list.currentIndex = 0
+          list.currentIndex = 0
       })
     }
   }
