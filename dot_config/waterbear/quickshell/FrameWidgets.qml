@@ -49,7 +49,7 @@ Scope {
         anchors.centerIn: parent
         spacing: 12
 
-        PowerWidget{ expanded: true }
+        PowerWidget{}
         CPUWidget{}
         RAMWidget{}
         StorageWidget{}

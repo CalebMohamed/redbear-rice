@@ -45,10 +45,14 @@ Item {
     open: root.popupOpen
     onCloseRequested: root.popupOpen = false
 
+    anchorItem: root
+
     popupWidth: Shell.Style.iconFont.pixelSize * 6
     popupHeight: Shell.Style.iconFont.pixelSize * 6
 
-    edge: EdgePopup.Bottom
+    edge: EdgePopup.Edge.Bottom
+    alignment: EdgePopup.Alignment.Center
+    offset: 0
 
     ColumnLayout {
       id: content

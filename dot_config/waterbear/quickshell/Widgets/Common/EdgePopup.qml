@@ -16,38 +16,159 @@ PanelWindow {
     Bottom
   }
 
-  required property bool open             // exposed for externally controlled popup
+  enum Alignment {
+    Start,
+    Center,
+    End
+  }
+
+  required property bool open
   signal closeRequested
 
-  property int edge: EdgePopup.Left       // default to left side
+  property int edge: EdgePopup.Left
 
-  property real popupWidth: Shell.Style.iconFont.pixelSize * 6
-  property real popupHeight: Shell.Style.iconFont.pixelSize * 6
+  // Optional item to position the popup relative to.
+  //
+  // When null, the popup behaves like the original EdgePopup:
+  // it is centred along the chosen screen edge.
+  property Item anchorItem: null
+
+  // Alignment along the edge.
+  //
+  // Left / Right:
+  //   Start  = top of anchor
+  //   Center = centre of anchor
+  //   End    = bottom of anchor
+  //
+  // Top / Bottom:
+  //   Start  = left of anchor
+  //   Center = centre of anchor
+  //   End    = right of anchor
+  property int alignment: EdgePopup.Center
+
+  // Offset along the edge.
+  //
+  // Left / Right: positive = down
+  // Top / Bottom: positive = right
+  property real offset: 0
+
+  property real popupWidth:
+  Shell.Style.iconFont.pixelSize * 6
+
+  property real popupHeight:
+  Shell.Style.iconFont.pixelSize * 6
 
   default property alias content: contentContainer.data
 
   readonly property bool horizontal:
-    edge === EdgePopup.Left || edge === EdgePopup.Right
+  edge === EdgePopup.Left || edge === EdgePopup.Right
 
   readonly property real corner: Shell.Style.cornerRadius
+
+  /*
+   * Geometry of anchorItem relative to its containing window.
+   *
+   * itemRect() is not reactive. Reading windowTransform makes this
+   * binding update when the containing window moves or transforms.
+   */
+  readonly property rect anchorRect: {
+    if (!anchorItem)
+    return Qt.rect(0, 0, 0, 0)
+
+    const window = anchorItem.QsWindow.window
+
+    if (!window)
+    return Qt.rect(0, 0, 0, 0)
+
+    window.windowTransform
+
+    return window.itemRect(anchorItem)
+  }
+
+  /*
+   * Coordinate along the screen edge at which the popup should be
+   * centred.
+   *
+   * Only meaningful when anchorItem is set.
+   */
+  readonly property real anchorPosition: {
+    if (!anchorItem)
+    return 0
+
+    if (horizontal) {
+      switch (alignment) {
+        case EdgePopup.Start:
+        return anchorRect.y
+
+        case EdgePopup.End:
+        return anchorRect.y + anchorRect.height
+
+        case EdgePopup.Center:
+        default:
+        return anchorRect.y + anchorRect.height / 2
+      }
+    }
+
+    switch (alignment) {
+      case EdgePopup.Start:
+      return anchorRect.x
+
+      case EdgePopup.End:
+      return anchorRect.x + anchorRect.width
+
+      case EdgePopup.Center:
+      default:
+      return anchorRect.x + anchorRect.width / 2
+    }
+  }
 
   exclusionMode: ExclusionMode.Ignore
   color: "transparent"
 
-  anchors.left: edge === EdgePopup.Left
-  anchors.right: edge === EdgePopup.Right
-  anchors.top: edge === EdgePopup.Top
-  anchors.bottom: edge === EdgePopup.Bottom
+  /*
+   * Without anchorItem:
+   *   exactly the old positioning model.
+   *
+   * With anchorItem:
+   *   add the perpendicular anchor so its margin can position it.
+   */
+  anchors {
+    left: edge === EdgePopup.Left
+    || (!horizontal && anchorItem !== null)
 
-  margins.left: edge === EdgePopup.Left ? Shell.Style.borderSize : 0
-  margins.right: edge === EdgePopup.Right ? Shell.Style.borderSize : 0
-  margins.top: edge === EdgePopup.Top ? Shell.Style.borderSize : 0
-  margins.bottom: edge === EdgePopup.Bottom ? Shell.Style.borderSize : 0
+    right: edge === EdgePopup.Right
+
+    top: edge === EdgePopup.Top
+    || (horizontal && anchorItem !== null)
+
+    bottom: edge === EdgePopup.Bottom
+  }
+
+  /*
+   * The edge itself keeps the existing border offset.
+   *
+   * When anchored, the perpendicular margin positions the popup so
+   * its centre coincides with anchorPosition.
+   */
+  margins {
+    left: edge === EdgePopup.Left ? Shell.Style.borderSize
+    : (!horizontal && anchorItem !== null ? anchorPosition - implicitWidth / 2
+    : 0)
+
+    right: edge === EdgePopup.Right
+    ? Shell.Style.borderSize : 0
+
+    top: edge === EdgePopup.Top ? Shell.Style.borderSize
+    : (horizontal && anchorItem !== null ? anchorPosition - implicitHeight / 2
+    : 0)
+
+    bottom: edge === EdgePopup.Bottom
+    ? Shell.Style.borderSize : 0
+  }
 
   implicitWidth: horizontal ? popupWidth : popupWidth + corner * 2
   implicitHeight: horizontal ? popupHeight + corner * 2 : popupHeight
 
-  // removed mouse interaction when closed
   mask: Region {
     item: root.open ? popupContent : null
   }
@@ -61,17 +182,28 @@ PanelWindow {
     anchors.verticalCenter: root.horizontal ? parent.verticalCenter : undefined
     anchors.horizontalCenter: !root.horizontal ? parent.horizontalCenter : undefined
 
-    topLeftRadius: root.edge === EdgePopup.Right || root.edge === EdgePopup.Bottom ? root.corner : 0
-    bottomLeftRadius: root.edge === EdgePopup.Right || root.edge === EdgePopup.Top ? root.corner : 0
-    topRightRadius: root.edge === EdgePopup.Left || root.edge === EdgePopup.Bottom ? root.corner : 0
-    bottomRightRadius: root.edge === EdgePopup.Left || root.edge === EdgePopup.Top ? root.corner : 0
+    topLeftRadius: root.edge === EdgePopup.Right || root.edge === EdgePopup.Bottom
+    ? root.corner : 0
+
+    bottomLeftRadius: root.edge === EdgePopup.Right || root.edge === EdgePopup.Top
+    ? root.corner : 0
+
+    topRightRadius: root.edge === EdgePopup.Left || root.edge === EdgePopup.Bottom
+    ? root.corner : 0
+
+    bottomRightRadius: root.edge === EdgePopup.Left || root.edge === EdgePopup.Top
+    ? root.corner : 0
 
     color: Colors.background
 
     x: {
       switch (root.edge) {
-        case EdgePopup.Left: return root.open ? 0 : -root.popupWidth
-        case EdgePopup.Right: return root.open ? 0 : root.popupWidth
+        case EdgePopup.Left:
+        return root.open ? 0 : -root.popupWidth
+
+        case EdgePopup.Right:
+        return root.open ? 0 : root.popupWidth
+
         default:
         return 0
       }
@@ -79,9 +211,14 @@ PanelWindow {
 
     y: {
       switch (root.edge) {
-        case EdgePopup.Top: return root.open ? 0 : -root.popupHeight
-        case EdgePopup.Bottom: return root.open ? 0 : root.popupHeight
-        default: return 0
+        case EdgePopup.Top:
+        return root.open ? 0 : -root.popupHeight
+
+        case EdgePopup.Bottom:
+        return root.open ? 0 : root.popupHeight
+
+        default:
+        return 0
       }
     }
 
@@ -219,5 +356,4 @@ PanelWindow {
       }
     }
   }
-
 }

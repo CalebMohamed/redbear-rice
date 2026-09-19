@@ -1,6 +1,6 @@
 # Use 'lch' for perceptually accurate colors
 color_space = "lch"
-palette = "dark"
+palette = "dark16"
 check_contrast = true
 
 [thresholds]

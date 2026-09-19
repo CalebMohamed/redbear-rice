@@ -8,7 +8,7 @@ QtObject {
   readonly property color surface:       "{{ background | lighten(0.10) }}"
   readonly property color text:          "{{ foreground }}"
   readonly property color textMuted:     "{{ foreground | darken(0.25) }}"
-  readonly property color accent:        "{{ color4 }}"
+  readonly property color accent:        "{{ color12 }}"
   readonly property color urgent:        "{{ color11 }}"
 
   // dark colours
