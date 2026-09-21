@@ -1,14 +1,12 @@
 import QtQuick
-import QtQuick.Layouts
-import QtQuick.Controls
+import Quickshell
 
 import qs as Shell
 import WallustTheme
 
-import "../Services"
-import "./Common"
+import "../../../Services/"
 
-ActionText {
+BentoSquare {
   id: root
 
   function icon(p,c) {
@@ -28,12 +26,14 @@ ActionText {
     : Colors.text
   }
 
-  property string powerIcon: icon(Power.percentage, Power.charging)
-  property string powerColor: hovered ? Colors.accent : colour(Power.percentage, Power.charging)
+  Item {
+    anchors.fill: parent
+    anchors.margins: 12
 
-  text: powerIcon
-  textItem.font: Shell.Style.uiFont
-  textItem.color: powerColor
-
-  onClicked: CentreService.openCentre()
+    Text {
+      text: `${icon(Power.percentage, Power.charging)} ${Power.percentage}%`
+      font: Shell.Style.uiFont
+      color: colour(Power.percentage, Power.charging)
+    }
+  }
 }

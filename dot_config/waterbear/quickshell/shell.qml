@@ -7,7 +7,7 @@ import Quickshell.Networking
 
 import "./Services"
 import "./Widgets/OSD"
-import "./Modules/notifications"
+import "./Modules/Centre"
 
 Scope {
   // this is for the wallust triggered reloads
@@ -61,20 +61,20 @@ Scope {
     target: "notifications"
 
     function toggle() {
-      NotificationService.toggleCentre()
+      CentreService.toggleCentre()
     }
 
     function open() {
-      NotificationService.openCentre()
+      CentreService.openCentre()
     }
 
     function close() {
-      NotificationService.closeCentre()
+      CentreService.closeCentre()
     }
   }
 
-  NotificationCentre {
-    screen: NotificationService.centreScreen
+  Centre {
+    screen: CentreService.centreScreen
   }
 
   Variants {

@@ -2,35 +2,25 @@ import qs as Shell
 import QtQuick
 import QtQuick.Controls
 import WallustTheme
+
 import "../Services"
+import "./Common"
 
-Text {
-  property bool expanded: false
-  property bool highlight: false
+ActionText {
+  id: root
 
-  function storageColor(c) {
-    return highlight ? Colors.accent
-      : c === null ? Colors.textMuted
-      : c >= 90 ? Colors.urgent
-      : c >= 70 ? Colors.accent
-      : Colors.text
+  function colour(c) {
+    return c === null ? Colors.textMuted
+    : c >= 90 ? Colors.urgent
+    : c >= 70 ? Colors.accent
+    : Colors.text
   }
 
-  text: {
-    if (!expanded) return "󰋊"
-    return `󰋊 ${Storage.usage === null ? "N/A" : `${Storage.usage}%`}`
-  }
+  property string storageColor: hovered ? Colors.accent : colour(Storage.usage)
 
-  font: Shell.Style.uiFont
-  color: storageColor(Storage.usage)
+  text: "󰋊"
+  textItem.font: Shell.Style.uiFont
+  textItem.color: storageColor
 
-  MouseArea { 
-    anchors.fill: parent 
-    hoverEnabled: true 
-    onClicked: expanded = !expanded
-
-    // for visuals
-    onEntered: highlight = true
-    onExited: highlight = false
-  }
+  onClicked: CentreService.openCentre()
 }

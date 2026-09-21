@@ -49,6 +49,7 @@ Scope {
         anchors.centerIn: parent
         spacing: 12
 
+        // SystemStats{}
         PowerWidget{}
         CPUWidget{}
         RAMWidget{}

@@ -2,35 +2,27 @@ import qs as Shell
 import QtQuick
 import QtQuick.Controls
 import WallustTheme
+
 import "../Services"
+import "./Common"
 
-Text {
-  property bool expanded: false
-  property bool highlight: false
+ActionText {
+  id: root
 
-  function ramColor(u) {
-    return highlight ? Colors.accent
-      : u === null ? Colors.textMuted
-      : u >= 90 ? Colors.urgent
-      : u >= 70 ? Colors.accent
-      : Colors.text
+  function colour(u) {
+    return u === null ? Colors.textMuted
+    : u >= 90 ? Colors.urgent
+    : u >= 70 ? Colors.accent
+    : Colors.text
   }
 
-  text: {
-    if (!expanded) return "󰘚"
-    return `󰘚 ${RAM.usage === null ? "N/A" : `${RAM.usage}%`}`
-  }
+  property string ramColor: hovered ? Colors.accent : colour(RAM.usage)
 
-  font: Shell.Style.uiFont
-  color: ramColor(RAM.usage)
+  text: "󰘚"
 
-  MouseArea { 
-    anchors.fill: parent 
-    hoverEnabled: true 
-    onClicked: expanded = !expanded
+  textItem.font: Shell.Style.uiFont
+  textItem.color: ramColor
 
-    // for visuals
-    onEntered: highlight = true
-    onExited: highlight = false
-  }
+  onClicked: CentreService.openCentre()
 }
+

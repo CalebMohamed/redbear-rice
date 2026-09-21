@@ -2,46 +2,34 @@ import qs as Shell
 import QtQuick
 import QtQuick.Controls
 import WallustTheme
+
 import "../Services"
+import "./Common"
 
-Text {
-  property bool expanded: false
-  property bool highlight: false
+ActionText {
+  id: root
 
-  function tempIcon(t) {
+  function icon(t) {
     return t === null ? ""
-      : t < 40 ? ""
-      : t < 55 ? ""
-      : t < 70 ? ""
-      : t < 85 ? ""
-      : ""
+    : t < 40 ? ""
+    : t < 55 ? ""
+    : t < 70 ? ""
+    : t < 85 ? ""
+    : ""
   }
 
-  function tempColor(t) {
-    return highlight ? Colors.accent
-      : t === null ? Colors.textMuted
-      : t < 55 ? Colors.text 
-      : Colors.urgent
+  function colour(t) {
+    return t === null ? Colors.textMuted
+    : t < 55 ? Colors.text 
+    : Colors.urgent
   }
 
-  text: {
-    const icon = tempIcon(Temperature.temperature)
+  property string tempIcon: icon(Temperature.temperature)
+  property string tempColor: hovered ? Colors.accent : colour(Temperature.temperature)
 
-    if (!expanded) return icon
+  text: tempIcon
+  textItem.font: Shell.Style.uiFont
+  textItem.color: tempColor
 
-    return `${icon} ${Temperature.temperature === null ? "N/A" : `${Temperature.temperature}°C`}`
-  }
-
-  font: Shell.Style.uiFont
-  color: tempColor(Temperature.temperature)
-
-  MouseArea { 
-    anchors.fill: parent 
-    hoverEnabled: true 
-    onClicked: expanded = !expanded
-
-    // for visuals
-    onEntered: highlight = true
-    onExited: highlight = false
-  }
+  onClicked: CentreService.openCentre()
 }

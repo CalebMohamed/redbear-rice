@@ -5,6 +5,8 @@ import Quickshell
 import Quickshell.Services.Notifications
 import Quickshell.Hyprland
 
+import "./NotificationHelpers"
+
 Singleton {
   id: root
 
@@ -49,13 +51,6 @@ Singleton {
   readonly property bool loading: !storeLoaded
   readonly property bool ready: storeLoaded
 
-  // the service is the authorative location of whether the Notification centre
-  // is open so that the widget can hook into it without having to be connected to the notification Centre
-  property bool centreOpen: false
-
-  // the service also determines what screen the centre should open on
-  property var centreScreen: null
-
   // Signals --------------------------------------------------------------
 
   signal notificationAdded(var record)
@@ -63,7 +58,6 @@ Singleton {
   signal notificationDismissed(var record)
   signal notificationReadChanged(var record)
   signal notificationUrgencyChanged(var record)
-  signal centreOpened()
 
   // Internal state ------------------------------------------------------
 
@@ -236,23 +230,8 @@ Singleton {
 
   // Public mutations ----------------------------------------------------
 
-  function openCentre() {
-    // works out which hyprland monitor is focused
-    const monitor = Hyprland.focusedMonitor
-
-    if (monitor !== null) {
-      for (const screen of Quickshell.screens) {
-        const hm = Hyprland.monitorFor(screen)
-
-        if (hm !== null && hm.id === monitor.id) {
-          centreScreen = screen
-          break
-        }
-      }
-    }
-
-    centreOpen = true
-
+  // called by the Centre Service to prepare the notifications data for viewing
+  function makeReady() {
     for (const record of records) {
       if (!record.dismissed && !record.read)
       record.read = true
@@ -260,18 +239,6 @@ Singleton {
 
     touchModel()
     persist()
-    centreOpened()
-  }
-
-  function closeCentre() {
-    centreOpen = false
-  }
-
-  function toggleCentre() {
-    if (centreOpen)
-    closeCentre()
-    else
-    openCentre()
   }
 
   function markRead(recordId) {

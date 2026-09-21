@@ -2,35 +2,25 @@ import qs as Shell
 import QtQuick
 import QtQuick.Controls
 import WallustTheme
+
 import "../Services"
+import "./Common"
 
-Text {
-  property bool expanded: false
-  property bool highlight: false
+ActionText {
+  id: root
 
-  function cpuColor(u) {
-    return highlight ? Colors.accent
-      : u === null ? Colors.textMuted
-      : u >= 90 ? Colors.urgent
-      : u >= 70 ? Colors.accent
-      : Colors.text
+  function colour(u) {
+    return u === null ? Colors.textMuted
+    : u >= 90 ? Colors.urgent
+    : u >= 70 ? Colors.accent
+    : Colors.text
   }
 
-  text: {
-    if (!expanded) return "󰍛"
-    return `󰍛 ${CPU.usage === null ? "N/A" : `${CPU.usage}%`}`
-  }
+  property string cpuColor: hovered ? Colors.accent : colour(CPU.usage)
 
-  font: Shell.Style.uiFont
-  color: cpuColor(CPU.usage)
+  text: "󰍛"
+  textItem.font: Shell.Style.uiFont
+  textItem.color: cpuColor
 
-  MouseArea { 
-    anchors.fill: parent 
-    hoverEnabled: true 
-    onClicked: expanded = !expanded
-
-    // for visuals
-    onEntered: highlight = true
-    onExited: highlight = false
-  }
+  onClicked: CentreService.openCentre()
 }
