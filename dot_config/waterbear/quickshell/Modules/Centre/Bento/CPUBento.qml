@@ -120,6 +120,7 @@ BentoSquare {
 
               Rectangle {
                 anchors.fill: parent
+
                 color: Colors.text
                 opacity: 0.1
               }

@@ -28,6 +28,7 @@ Rectangle {
 
   radius: Shell.Style.cornerRadius
   color: Colors.background
+  opacity: 0.85
 
   MouseArea {
     anchors.fill: parent

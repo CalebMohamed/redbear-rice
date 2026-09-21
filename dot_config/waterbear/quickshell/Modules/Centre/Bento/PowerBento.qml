@@ -102,8 +102,7 @@ BentoSquare {
         Rectangle {
           anchors.fill: parent
           radius: height / 2
-          color: Colors.text
-          opacity: 0.1
+          color: Qt.alpha(Colors.text, 0.1)
         }
 
         Rectangle {
