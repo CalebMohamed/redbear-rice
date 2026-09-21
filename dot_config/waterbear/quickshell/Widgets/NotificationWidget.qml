@@ -3,7 +3,8 @@ import QtQuick.Controls
 
 import qs as Shell
 import WallustTheme
-import "../Modules/notifications"
+
+import "../Services"
 
 Text {
   property bool highlight: false

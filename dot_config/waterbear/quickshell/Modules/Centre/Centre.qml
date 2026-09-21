@@ -4,7 +4,8 @@ import Quickshell.Wayland
 
 import qs as Shell
 import WallustTheme
-import "../../Widgets/Common"
+
+import "../../Components"
 import "../../Services"
 
 PanelWindow {

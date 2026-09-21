@@ -6,8 +6,8 @@ import qs as Shell
 
 import WallustTheme
 
+import "../../Components"
 import "../../Services"
-import "../Common"
 
 EdgePopup {
   id: root

@@ -4,7 +4,7 @@ import QtQuick.Controls
 import WallustTheme
 
 import "../Services"
-import "./Common"
+import "../Components"
 
 ActionText {
   id: root
@@ -20,16 +20,14 @@ ActionText {
 
   function colour(t) {
     return t === null ? Colors.textMuted
-    : t < 55 ? Colors.text 
+    : t < 75 ? Colors.text
+    : t < 90 ? Colors.accent
     : Colors.urgent
   }
 
-  property string tempIcon: icon(Temperature.temperature)
-  property string tempColor: hovered ? Colors.accent : colour(Temperature.temperature)
-
-  text: tempIcon
+  text: icon(Temperature.temperature)
   textItem.font: Shell.Style.uiFont
-  textItem.color: tempColor
+  textItem.color: hovered ? Colors.accent : colour(Temperature.temperature)
 
   onClicked: CentreService.openCentre()
 }

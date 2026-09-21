@@ -7,7 +7,7 @@ import QtQuick.Controls
 import qs as Shell
 import WallustTheme
 
-import "./Widgets/Common"
+import "./Components" // for bevel corner
 
 Scope {
   id: root

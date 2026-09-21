@@ -6,7 +6,7 @@ import Quickshell.Io
 import Quickshell.Networking
 
 import "./Services"
-import "./Widgets/OSD"
+import "./Modules/OSD"
 import "./Modules/Centre"
 
 Scope {

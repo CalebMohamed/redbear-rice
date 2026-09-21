@@ -1,10 +1,13 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+
 import qs as Shell
 import WallustTheme
+
 import "../../Services"
-import "../Common"
+import "../Components"
+import "../Components/Timer"
 
 Item {
   id: root

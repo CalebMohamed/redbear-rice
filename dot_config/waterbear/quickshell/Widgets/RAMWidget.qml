@@ -4,7 +4,7 @@ import QtQuick.Controls
 import WallustTheme
 
 import "../Services"
-import "./Common"
+import "../Components"
 
 ActionText {
   id: root
@@ -16,12 +16,9 @@ ActionText {
     : Colors.text
   }
 
-  property string ramColor: hovered ? Colors.accent : colour(RAM.usage)
-
   text: "󰘚"
-
   textItem.font: Shell.Style.uiFont
-  textItem.color: ramColor
+  textItem.color: hovered ? Colors.accent : colour(RAM.usage)
 
   onClicked: CentreService.openCentre()
 }

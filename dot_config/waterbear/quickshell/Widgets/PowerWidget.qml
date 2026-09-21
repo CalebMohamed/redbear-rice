@@ -6,7 +6,7 @@ import qs as Shell
 import WallustTheme
 
 import "../Services"
-import "./Common"
+import "../Components"
 
 ActionText {
   id: root
@@ -28,12 +28,9 @@ ActionText {
     : Colors.text
   }
 
-  property string powerIcon: icon(Power.percentage, Power.charging)
-  property string powerColor: hovered ? Colors.accent : colour(Power.percentage, Power.charging)
-
-  text: powerIcon
+  text: icon(Power.percentage, Power.charging)
   textItem.font: Shell.Style.uiFont
-  textItem.color: powerColor
+  textItem.color: hovered ? Colors.accent : colour(Power.percentage, Power.charging)
 
   onClicked: CentreService.openCentre()
 }

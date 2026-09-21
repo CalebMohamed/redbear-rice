@@ -4,7 +4,7 @@ import qs as Shell
 import WallustTheme
 
 import "../Services"
-import "./Common"
+import "../Components"
 
 Text {
   id: root
