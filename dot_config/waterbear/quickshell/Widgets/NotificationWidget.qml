@@ -19,7 +19,7 @@ Text {
   MouseArea { 
     anchors.fill: parent 
     hoverEnabled: true
-    onClicked: NotificationService.toggleCentre()
+    onClicked: CentreService.toggleCentre()
 
     // for visuals
     onEntered: highlight = true
