@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -u
+
+word="$(wl-paste --primary --no-newline 2>/dev/null || true)"
+
+# Trim whitespace.
+word="$(printf '%s' "$word" |
+    sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+
+if [[ -z "$word" ]]; then
+    notify-send "Selection Oracle" "No text selected."
+    exit 1
+fi
+
+# Avoid accidentally querying an entire selected paragraph.
+if [[ "$word" == *[[:space:]]* ]]; then
+    notify-send "Selection Oracle" \
+        "Select a single word, not: “$word”"
+    exit 1
+fi
+
+result="$(dict -d wn "$word" 2>/dev/null)"
+
+if [[ $? -ne 0 || -z "$result" ]]; then
+    notify-send "Selection Oracle" \
+        "No definition found for “$word”."
+    exit 0
+fi
+
+notify-send \
+    --app-name="Selection Oracle" \
+    --expire-time=15000 \
+    "$word" \
+    "$result"

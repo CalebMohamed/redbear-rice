@@ -18,10 +18,17 @@ hl.bind(mainMod .. " + SHIFT + RETURN", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + SHIFT + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu))
+
+-- wallpaper change
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("ls $HOME/pictures/wallpapers | wmenu-pretty -p 'select wallpaper' -l 10 -i | xargs -I {} set-background '{}'"))
+-- lock
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("waterbear-lock"))
+-- open system centre
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs ipc call centre toggle"))
+-- open a program
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu))
+-- selection oracle
+hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("selection-oracle"))
 
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 -- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only

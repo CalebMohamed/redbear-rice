@@ -10,17 +10,17 @@ QtObject {
 
   readonly property font h1Font: Qt.font({
     family: "CaskaydiaCove NFM",
-    pointSize: 24
+    pointSize: 20
   })
 
   readonly property font h2Font: Qt.font({
     family: "CaskaydiaCove NFM",
-    pointSize: 18
+    pointSize: 16
   })
 
   readonly property font contentFont: Qt.font({
     family: "CaskaydiaCove NFM",
-    pointSize: 16
+    pointSize: 12
   })
 
   readonly property font iconFont: Qt.font({

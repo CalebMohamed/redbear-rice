@@ -103,6 +103,11 @@ Singleton {
       if (root.remainingSeconds <= 0) {
         root.running = false
         root.finished = true
+        Notifier.notify(
+          "timer finished!",
+          "time to take a break.",
+          "low"
+        )
       }
     }
   }

@@ -48,12 +48,22 @@ Singleton {
   readonly property int historySize: 60
   readonly property int sampleIntervalMs: 30 * 1000
 
+  // notifications
+  readonly property int lowBatteryThreshold: 20
+  readonly property int criticalBatteryThreshold: 10
+
+  property bool _lowBatteryNotified: false
+  property bool _criticalBatteryNotified: false
+
   Timer {
     interval: root.sampleIntervalMs
     running: root.ready
     repeat: true
 
-    onTriggered: root.recordSample()
+    onTriggered: {
+      root.recordSample()
+      root.checkBatteryNotifications()
+    }
   }
 
   function recordSample() {
@@ -73,6 +83,49 @@ Singleton {
     next.shift()
 
     root.history = next
+  }
+
+  function checkBatteryNotifications() {
+    if (!root.ready)
+    return
+
+    // Reset notification state whenever we're charging.
+    if (root.charging) {
+      root._lowBatteryNotified = false
+      root._criticalBatteryNotified = false
+      return
+    }
+
+    if (!root.discharging)
+    return
+
+    if (
+      root.percentage <= root.criticalBatteryThreshold &&
+      !root._criticalBatteryNotified
+    ) {
+      Notifier.notify(
+        "battery critical",
+        `${root.percentage}% remaining`,
+        "critical"
+      )
+
+      root._criticalBatteryNotified = true
+      root._lowBatteryNotified = true
+      return
+    }
+
+    if (
+      root.percentage <= root.lowBatteryThreshold &&
+      !root._lowBatteryNotified
+    ) {
+      Notifier.notify(
+        "battery low",
+        `${root.percentage}% remaining`,
+        "low"
+      )
+
+      root._lowBatteryNotified = true
+    }
   }
 
   Component.onCompleted: {

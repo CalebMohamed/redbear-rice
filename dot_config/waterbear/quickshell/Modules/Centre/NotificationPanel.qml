@@ -14,7 +14,7 @@ Rectangle {
 
   property int selectedIndex: 0
 
-  width: Math.min(parent.width * 0.40, 720)
+  width: parent.width * 0.4
 
   anchors {
     top: parent.top
@@ -274,9 +274,14 @@ Rectangle {
             wrapMode: Text.Wrap
 
             // Prevent an absurdly large notification from taking
-            // over the entire centre.
-            maximumLineCount: 5
-            elide: Text.ElideRight
+            // over the entire centre (unless selected).
+            maximumLineCount:
+            list.currentIndex === notificationDelegate.index
+            ? 0 : 5
+
+            elide:
+            list.currentIndex === notificationDelegate.index
+            ? Text.ElideNone : Text.ElideRight
           }
 
           // -----------------------------------------------------------------
@@ -376,7 +381,7 @@ Rectangle {
   // ---------------------------------------------------------------------------
   // public API (for the keyboard control) 
   // ---------------------------------------------------------------------------
-  
+
   function selectFirst() {
     if (list.count > 0)
     list.currentIndex = 0

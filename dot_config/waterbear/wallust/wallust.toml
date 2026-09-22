@@ -15,3 +15,4 @@ wmenu = { template = 'wmenu', target = '~/.cache/wmenu/colors.sh' }
 qml = { template = 'qml', target = '~/.cache/qml/WallustTheme/Colors.qml' }
 hypr = { template = 'hypr', target = '~/.cache/hypr/colors.lua' }
 swaylock = { template = 'swaylock', target = '~/.cache/swaylock/colors.sh' }
+firefox = { template = 'firefox', target = '~/.config/waterbear/mozilla/firefox/k7xxxbi1.default-release/chrome/wallust.css' }
