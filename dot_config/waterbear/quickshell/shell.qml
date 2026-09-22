@@ -58,7 +58,7 @@ Scope {
   }
 
   IpcHandler {
-    target: "notifications"
+    target: "centre"
 
     function toggle() {
       CentreService.toggleCentre()

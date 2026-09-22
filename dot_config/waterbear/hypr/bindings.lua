@@ -21,7 +21,7 @@ hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.window.float({ action = "toggle" }
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("ls $HOME/pictures/wallpapers | wmenu-pretty -p 'select wallpaper' -l 10 -i | xargs -I {} set-background '{}'"))
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("waterbear-lock"))
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs ipc call notifications toggle"))
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs ipc call centre toggle"))
 
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 -- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
