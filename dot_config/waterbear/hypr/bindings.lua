@@ -25,10 +25,12 @@ hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("ls $HOME/pictures/wallpapers
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("waterbear-lock"))
 -- open system centre
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("qs ipc call centre toggle"))
--- open a program
-hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu))
 -- selection oracle
 hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("selection-oracle"))
+-- open a program
+hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu))
+-- open system clock
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("qs ipc call clock toggle"))
 
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 -- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only

@@ -127,7 +127,7 @@ Scope {
         spacing: 12
 
         WorkspaceIndicator{}
-        ClockWidget{}
+        DateWidget{}
       }
     }
 

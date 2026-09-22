@@ -5,6 +5,7 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Networking
 
+import "./Components"
 import "./Services"
 import "./Modules/OSD"
 import "./Modules/Centre"
@@ -75,6 +76,26 @@ Scope {
 
   Centre {
     screen: CentreService.centreScreen
+  }
+
+  IpcHandler {
+    target: "clock"
+
+    function toggle() {
+      Time.toggleClock()
+    }
+
+    function open() {
+      Time.openClock()
+    }
+
+    function close() {
+      Time.closeClock()
+    }
+  }
+
+  Clock {
+    screen: Time.clockScreen
   }
 
   Variants {
