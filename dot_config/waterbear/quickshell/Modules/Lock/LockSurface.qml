@@ -107,33 +107,6 @@ WlSessionLockSurface {
         root.submit(text)
         clear()
       }
-
-    }
-
-    Text {
-      width: parent.width
-      horizontalAlignment: Text.AlignHCenter
-
-      text: {
-        if (!root.secure)
-        return "Securing..."
-
-        switch (root.state) {
-          case LockContext.State.Authenticating:
-          return "Checking..."
-          case LockContext.State.Error:
-          return root.errorMessage
-          default:
-          return ""
-        }
-      }
-
-      color: root.state === LockContext.State.Error
-      ? Colors.urgent
-      : Colors.textMuted 
-
-      font: Shell.Style.errorFont
-      visible: text.length > 0
     }
   }
 
@@ -154,6 +127,39 @@ WlSessionLockSurface {
     text: `${Quickshell.env("USER")}`
     font: Shell.Style.passwordFont
     color: Colors.text
+  }
+
+  Text {
+    anchors {
+      right: parent.right
+      bottom: parent.bottom
+      rightMargin: 60
+      bottomMargin: 60
+    }
+
+    width: parent.width
+    horizontalAlignment: Text.AlignRight
+
+    text: {
+      if (!root.secure)
+      return "Securing..."
+
+      switch (root.state) {
+        case LockContext.State.Authenticating:
+        return "Checking..."
+        case LockContext.State.Error:
+        return root.errorMessage
+        default:
+        return ""
+      }
+    }
+
+    color: root.state === LockContext.State.Error
+    ? Colors.urgent
+    : Colors.textMuted 
+
+    font: Shell.Style.errorFont
+    visible: text.length > 0
   }
 
   Component.onCompleted: {
