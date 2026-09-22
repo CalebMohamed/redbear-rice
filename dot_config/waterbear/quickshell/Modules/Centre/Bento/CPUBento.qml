@@ -158,6 +158,9 @@ BentoSquare {
                 const centerY = height / 2
                 const radius = Math.min(width, height) / 2 - lineWidth / 2
 
+                if (radius <= 0)
+                return
+
                 // Start at 12 o'clock.
                 const start = -Math.PI / 2
                 const end = start + 2 * Math.PI * Math.min(usage, 100) / 100

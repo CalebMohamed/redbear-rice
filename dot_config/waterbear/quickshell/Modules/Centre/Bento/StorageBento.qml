@@ -56,7 +56,7 @@ BentoSquare {
         margins: 20
       }
 
-      spacing: 12
+      spacing: 20
 
       // Header
       Row {

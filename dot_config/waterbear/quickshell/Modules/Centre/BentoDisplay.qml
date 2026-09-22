@@ -58,13 +58,12 @@ Item {
     Row {
       spacing: 20
 
-      TemperatureBento {
+      NetworkBento {
         container: root
       }
 
-      Item {
-        width: (root.height - 40) / 3
-        height: width
+      ProcessesBento {
+        container: root
       }
     }
   }
