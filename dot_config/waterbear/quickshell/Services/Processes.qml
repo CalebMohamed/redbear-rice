@@ -182,16 +182,5 @@ Singleton {
     .slice()
     .sort((a, b) => b.memory - a.memory)
     .slice(0, root.processLimit)
-
-    console.log(
-      "Processes:",
-      root._count,
-      "CPU:",
-      root._byCpu.length,
-      "RAM:",
-      root._byMemory.length
-    )
   }
-
-  Component.onCompleted: console.log("i am up")
 }

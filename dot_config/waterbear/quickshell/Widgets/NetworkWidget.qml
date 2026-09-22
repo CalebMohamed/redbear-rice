@@ -5,7 +5,6 @@ import WallustTheme
 import "../Services"
 
 Text {
-  property bool expanded: false
   property bool highlight: false
 
   function networkIcon(connected, wired, strength) {
@@ -25,22 +24,14 @@ Text {
       : Colors.text
   }
 
-  text: {
-    const icon = networkIcon(Network.connected, Network.wired, Network.strength)
-
-    if (!expanded)
-    return icon
-
-    return `${icon} ${Network.connected ? Network.networkName : "disconnected"}`
-  }
-
+  text: `${networkIcon(Network.connected, Network.wired, Network.strength)} ${Network.connected ? Network.networkName : "disconnected"}`
   font: Shell.Style.uiFont
   color: networkColor(Network.connected, Network.wired, Network.strength)
 
   MouseArea { 
     anchors.fill: parent 
     hoverEnabled: true
-    onClicked: expanded = !expanded
+    onClicked: CentreService.openCentre()
 
     // for visuals
     onEntered: highlight = true

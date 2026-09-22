@@ -90,7 +90,7 @@ Scope {
         anchors.centerIn: parent
         spacing: 12
 
-        NetworkWidget{ expanded: true }
+        NetworkWidget{}
       }
     }
   }
