@@ -134,17 +134,17 @@ Item {
         Item { Layout.fillWidth: true }
 
         TimerControl {
-          icon: "󰔟"
+          icon: ""
           onClicked: TimerService.setPreset(10)
         }
 
         TimerControl {
-          icon: "󰔛"
+          icon: ""
           onClicked: TimerService.setPreset(30)
         }
 
         TimerControl {
-          icon: "󰔚"
+          icon: ""
           onClicked: TimerService.setPreset(60)
         }
 
