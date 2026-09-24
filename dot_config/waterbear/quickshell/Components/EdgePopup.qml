@@ -4,7 +4,7 @@ import QtQuick
 import qs as Shell
 import WallustTheme
 
-import "../Common"
+import "./Common"
 
 PanelWindow {
   id: root

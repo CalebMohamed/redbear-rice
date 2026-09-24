@@ -6,7 +6,7 @@ import Quickshell.Wayland
 import WallustTheme
 import qs as Shell
 
-import "../Widgets/"
+import "./Services"
 
 WlSessionLockSurface {
   id: root
@@ -118,15 +118,39 @@ WlSessionLockSurface {
       bottomMargin: 60
     }
 
-    width: parent.width
-    height: Shell.Style.passwordFont.pixelSize
-
-    horizontalAlignment: TextInput.AlignLeft
-    verticalAlignment: TextInput.AlignVCenter
-
     text: `${Quickshell.env("USER")}`
     font: Shell.Style.passwordFont
     color: Colors.text
+  }
+
+  function icon(p,c) {
+    return p === null ? ""
+    : c ? ""
+    : p < 20 ? ""
+    : p < 40 ? ""
+    : p < 60 ? ""
+    : p < 80 ? ""
+    : ""
+  }
+
+  function colour(p,c) {
+    return p === null ? Colors.textMuted
+    : c ? Colors.accent
+    : p < 10 ? Colors.urgent
+    : Colors.text
+  }
+
+  Text {
+    anchors {
+      right: parent.right
+      top: parent.top
+      rightMargin: 60
+      topMargin: 60
+    }
+
+    text: `${icon(Power.percentage, Power.charging)}`
+    font: Shell.Style.iconFont
+    color: colour(Power.percentage, Power.charging)
   }
 
   Text {
@@ -137,7 +161,6 @@ WlSessionLockSurface {
       bottomMargin: 60
     }
 
-    width: parent.width
     horizontalAlignment: Text.AlignRight
 
     text: {

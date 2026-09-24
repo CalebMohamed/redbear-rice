@@ -5,7 +5,7 @@ import Quickshell
 import qs as Shell
 import WallustTheme
 
-import "../../Services"
+import "../Services"
 import "../Components"
 import "../Components/Timer"
 
