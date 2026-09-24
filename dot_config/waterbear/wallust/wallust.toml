@@ -9,10 +9,11 @@ min_lw = 2 # not too dark
 max_lw = 15 # not too light
 
 [templates]
-foot = { template = 'foot', target = '~/.config/waterbear/foot/foot.ini' }
-mako = { template = 'mako', target = '~/.config/waterbear/mako/config' }
-wmenu = { template = 'wmenu', target = '~/.cache/wmenu/colors.sh' }
-qml = { template = 'qml', target = '~/.cache/qml/WallustTheme/Colors.qml' }
-hypr = { template = 'hypr', target = '~/.cache/hypr/colors.lua' }
-swaylock = { template = 'swaylock', target = '~/.cache/swaylock/colors.sh' }
 firefox = { template = 'firefox', target = '~/.config/waterbear/mozilla/firefox/k7xxxbi1.default-release/chrome/wallust.css' }
+foot = { template = 'foot', target = '~/.config/waterbear/foot/foot.ini' }
+hypr = { template = 'hypr', target = '~/.cache/hypr/colors.lua' }
+mako = { template = 'mako', target = '~/.config/waterbear/mako/config' }
+qml = { template = 'qml', target = '~/.cache/qml/WallustTheme/Colors.qml' }
+swaylock = { template = 'swaylock', target = '~/.cache/swaylock/colors.sh' }
+starship = { template = 'starship.toml', target = '~/.starship.toml' }
+wmenu = { template = 'wmenu', target = '~/.cache/wmenu/colors.sh' }

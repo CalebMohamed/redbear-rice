@@ -1,35 +1,35 @@
-#!/bin/bash  
+#!/bin/bash
 
-# The source directory of the backgrounds
 SOURCE_DIR="$HOME/pictures/wallpapers"
-# taking the chance to process any new additions
 BLUR_DIR="$HOME/pictures/wallpapers-processed"
+CURRENT="$HOME/.local/share/current_wallpaper"
+
 blur-wallpapers
 
-wallpaper="$SOURCE_DIR/$1"
-blurpaper="$BLUR_DIR/$1"
-
-# Exit if no wallpaper is selected
-if [ -z "$wallpaper" ]; then
-  echo "no wallpaper selected."
-  exit 1
+# Use explicitly supplied wallpaper, otherwise restore the previous one
+if [ -n "$1" ]; then
+    wallpaper="$SOURCE_DIR/$1"
+    blurpaper="$BLUR_DIR/$1"
+elif [ -L "$CURRENT" ] && [ -e "$CURRENT" ]; then
+    blurpaper="$(readlink -f "$CURRENT")"
+    wallpaper="$SOURCE_DIR/$(basename "$blurpaper")"
+else
+    wallpaper="$SOURCE_DIR/arch-desktop.jpg"
+    blurpaper="$BLUR_DIR/arch-desktop.jpg"
+    echo "no wallpaper selected and no previous wallpaper exists. (so defaulted to arch desktop)"
 fi
 
-# Kill the current swaybg instance, and start another
 pkill -x swaybg
 swaybg -i "$blurpaper" -m fill > /dev/null 2>&1 &
-ln -sf "$blurpaper" "$HOME/.local/share/current_wallpaper.jpg"
 
-# use wallust to generate colour pallet and update
+ln -sf "$blurpaper" "$CURRENT"
+
 echo "$wallpaper"
-# Run wallust on the selected wallpaper
-# wallust run -q "$wallpaper"
 wallust run "$wallpaper"
-# Send SIGUSR1 to dwl
+
+# sends the reload signals to relevant programs
 pkill -USR1 -x dwl
-# send signal to mako
 makoctl reload
-# send signal to reload qs
 qs ipc call shell reload
-# send signal to reload hyprland
 hyprctl reload
+
