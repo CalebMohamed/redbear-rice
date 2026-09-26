@@ -3,7 +3,8 @@ font=CaskaydiaCove NFM:size=16,JetBrainsMono NFM:size=16,Noto Color Emoji:size=1
 pad=16x16
 
 [colors-dark]
-alpha=1.0
+alpha=0.75
+alpha-mode=default
 background={{ background | strip }}  
 foreground={{ foreground | strip }}  
 selection-foreground={{ background | strip }}  
@@ -20,7 +21,8 @@ regular6={{ color6 | strip }}    # cyan
 regular7={{ color7 | strip }}    # white
 
 [colors-light]
-alpha=1.0
+alpha=0.75
+alpha-mode=default
 background={{ background | strip }}  
 foreground={{ foreground | strip }}  
 selection-foreground={{ background | strip }}  
