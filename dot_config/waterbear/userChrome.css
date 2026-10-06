@@ -1,0 +1,466 @@
+/* Imports must come first */
+@import url(wallust.css);
+
+/* ==========================================================================
+ * Design tokens
+ * ========================================================================== */
+
+@layer tokens {
+  :root {
+    /* Surfaces */
+    --color-surface-sidebar: var(--primitive-gray-900);
+    --color-surface-base: var(--primitive-gray-850);
+    --color-surface-elevated: var(--primitive-gray-800);
+    --color-surface-button: var(--primitive-gray-700);
+    --color-surface-input: var(--primitive-gray-600);
+
+    /* Text */
+    --color-text-primary: var(--primitive-white-90);
+    --color-text-muted: var(--primitive-white-60);
+
+    /* Accent */
+    --color-accent: var(--primitive-blue-400);
+    --color-accent-secondary: var(--primitive-magenta-400);
+
+    /* Interaction states */
+    --color-state-hover: var(--primitive-alpha-08);
+    --color-state-active: var(--primitive-alpha-15);
+
+    /* Derived icon colours */
+    --color-icon-muted:
+      color-mix(
+        in srgb,
+        var(--color-text-primary) 65%,
+        transparent
+      );
+
+    --color-icon-muted-x:
+      color-mix(
+        in srgb,
+        var(--color-text-primary) 45%,
+        transparent
+      );
+  }
+}
+
+
+/* ==========================================================================
+ * Firefox / Nova token mapping
+ * ========================================================================== */
+
+:root {
+  /* Main surfaces */
+  --toolbar-bgcolor: var(--color-surface-base) !important;
+  --toolbar-background-color: var(--color-surface-base) !important;
+  --toolbox-background-color: var(--color-surface-base) !important;
+
+  /* Panels */
+  --uc-menu-bkgnd: var(--color-surface-elevated) !important;
+  --arrowpanel-background: var(--color-surface-elevated) !important;
+  --autocomplete-popup-background: var(--color-surface-elevated) !important;
+
+  /* Text */
+  --toolbar-color: var(--color-text-primary) !important;
+  --arrowpanel-color: var(--color-text-primary) !important;
+  --autocomplete-popup-color: var(--color-text-primary) !important;
+
+  /* Inputs */
+  --toolbar-field-background-color: var(--color-surface-input) !important;
+  --toolbar-field-color: var(--color-text-primary) !important;
+  --toolbar-field-focus-background-color: var(--color-surface-input) !important;
+  --toolbar-field-focus-color: var(--color-text-primary) !important;
+
+  /* Interaction */
+  --toolbarbutton-hover-background: var(--color-state-hover) !important;
+  --toolbarbutton-active-background: var(--color-state-active) !important;
+
+  /* Focus */
+  --focus-outline-color: var(--color-accent) !important;
+
+  /* Compatibility / custom components */
+  --uc-menu-disabled: var(--color-text-muted) !important;
+  --lwt-toolbar-field-focus: var(--color-surface-input) !important;
+
+  /*
+   * Nova selected-tab gradient.
+   *
+   * Firefox constructs the gradient itself from these two colours.
+   * Do not replace this with a separate background gradient.
+   */
+  --tab-border-color-selected-leading:
+    var(--color-accent) !important;
+
+  --tab-border-color-selected-trailing:
+    var(--color-accent-secondary) !important;
+
+  /* Selected tab interior */
+  --tab-background-color-selected:
+    var(--color-surface-elevated) !important;
+
+  /* Selected tab text */
+  --tab-text-color-selected:
+    var(--color-text-primary) !important;
+}
+
+
+/* ==========================================================================
+ * Horizontal tabs
+ * ========================================================================== */
+
+#tabbrowser-tabs[orient="horizontal"] {
+  min-height: 25px !important;
+  height: 25px !important;
+  padding-top: 1px !important;
+  margin-top: 2px !important;
+}
+
+#tabbrowser-tabs[orient="horizontal"] .tab-background {
+  margin-block: 1px !important;
+}
+
+.titlebar-buttonbox-container {
+  transform: translateY(1px) !important;
+}
+
+
+/* ==========================================================================
+ * Nova sidebar / vertical tabs
+ * ========================================================================== */
+
+/*
+ * There are several layers here:
+ *
+ * #sidebar-main       Nova sidebar/launcher host
+ * #vertical-tabs      vertical tabstrip CustomizableUI area
+ * #tabbrowser-tabs    actual Firefox tab container
+ * #sidebar-box        opened sidebar panel (History, Bookmarks, etc.)
+ */
+
+
+/* --------------------------------------------------------------------------
+ * Entire Nova left rail
+ * -------------------------------------------------------------------------- */
+
+#sidebar-main {
+  background: var(--color-surface-sidebar) !important;
+  background-color: var(--color-surface-sidebar) !important;
+  color: var(--color-text-primary) !important;
+
+  /* Feed Firefox's own sidebar components our colours */
+  --toolbar-bgcolor: var(--color-surface-sidebar) !important;
+  --toolbar-color: var(--color-text-primary) !important;
+
+  --button-background-color-hover:
+    var(--color-state-hover) !important;
+
+  --button-background-color-active:
+    var(--color-state-active) !important;
+}
+
+
+/* --------------------------------------------------------------------------
+ * Vertical tab strip
+ * -------------------------------------------------------------------------- */
+
+#vertical-tabs {
+  background: var(--color-surface-sidebar) !important;
+  background-color: var(--color-surface-sidebar) !important;
+  color: var(--color-text-primary) !important;
+}
+
+#vertical-tabs #tabbrowser-tabs {
+  background: transparent !important;
+  color: var(--color-text-primary) !important;
+}
+
+
+/* --------------------------------------------------------------------------
+ * Vertical tabs
+ * -------------------------------------------------------------------------- */
+
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab {
+  color: var(--color-text-muted) !important;
+}
+
+#tabbrowser-tabs[orient="vertical"] .tabbrowser-tab[selected] {
+  color: var(--color-text-primary) !important;
+}
+
+
+/* Unselected tab */
+
+#tabbrowser-tabs[orient="vertical"]
+.tabbrowser-tab:not([selected], [multiselected])
+.tab-background {
+  background-color: transparent !important;
+}
+
+
+/* Hover */
+
+#tabbrowser-tabs[orient="vertical"]
+.tabbrowser-tab:not([selected], [multiselected]):hover
+.tab-background {
+  background-color: var(--color-state-hover) !important;
+}
+
+/* Don't override background/border on:
+ *  .tabbrowser-tab[selected] .tab-background
+ * Nova paints its gradient selected-tab border there.
+ */
+
+/* --------------------------------------------------------------------------
+ * Tab icons
+ * -------------------------------------------------------------------------- */
+
+#tabbrowser-tabs[orient="vertical"]
+.tabbrowser-tab:not([selected])
+.tab-icon-image {
+  opacity: 0.65 !important;
+}
+
+#tabbrowser-tabs[orient="vertical"]
+.tabbrowser-tab[selected]
+.tab-icon-image {
+  opacity: 1 !important;
+}
+
+/* --------------------------------------------------------------------------
+ * Nova sidebar launcher / shortcut icons
+ * -------------------------------------------------------------------------- */
+
+/* sidebar-main is a custom element. Its visible launcher controls live inside
+ * its shadow tree, so theme them via inherited semantic component variables. */
+sidebar-main,
+#sidebar-main {
+  background: var(--color-surface-sidebar) !important;
+  background-color: var(--color-surface-sidebar) !important;
+  color: var(--color-text-primary) !important;
+
+  --background-color-canvas: var(--color-surface-sidebar) !important;
+  --background-color-box: var(--color-surface-sidebar) !important;
+
+  --text-color: var(--color-text-primary) !important;
+  --text-color-deemphasized: var(--color-text-muted) !important;
+
+  --button-background-color: transparent !important;
+  --button-background-color-hover: var(--color-state-hover) !important;
+  --button-background-color-active: var(--color-state-active) !important;
+
+  --button-text-color: var(--color-icon-muted) !important;
+  --button-text-color-hover: var(--color-text-primary) !important;
+  --button-text-color-active: var(--color-text-primary) !important;
+
+  --icon-color: var(--color-icon-muted) !important;
+  --icon-color-hover: var(--color-text-primary) !important;
+
+  --border-color: var(--primitive-alpha-15) !important;
+}
+
+/* The vertical tabstrip is a separate CustomizableUI area. */
+#vertical-tabs,
+#vertical-tabs.customization-target {
+  background: var(--color-surface-sidebar) !important;
+  background-color: var(--color-surface-sidebar) !important;
+  color: var(--color-text-primary) !important;
+}
+
+#vertical-tabs #tabbrowser-tabs {
+  background: transparent !important;
+  color: var(--color-text-primary) !important;
+}
+
+
+/* --------------------------------------------------------------------------
+ * Traditional/open sidebar panel
+ * -------------------------------------------------------------------------- */
+
+#sidebar-box {
+  --sidebar-background-color:
+    var(--color-surface-sidebar) !important;
+
+  background: var(--color-surface-sidebar) !important;
+  color: var(--color-text-primary) !important;
+}
+
+#sidebar-box #sidebar-header,
+#sidebar {
+  background: var(--color-surface-sidebar) !important;
+  color: var(--color-text-primary) !important;
+}
+
+window.sidebar-panel {
+  --lwt-sidebar-background-color:
+    var(--color-surface-sidebar) !important;
+}
+
+/* ==========================================================================
+ * Navigation / toolbar
+ * ========================================================================== */
+
+#nav-bar {
+  background-color: var(--color-surface-base) !important;
+  color: var(--color-text-primary) !important;
+}
+
+#PersonalToolbar {
+  background-color: var(--color-surface-base) !important;
+  color: var(--color-text-primary) !important;
+}
+
+
+/* ==========================================================================
+ * URL bar
+ * ========================================================================== */
+
+#urlbar-background {
+  background-color: var(--color-surface-input) !important;
+}
+
+#urlbar {
+  color: var(--color-text-primary) !important;
+}
+
+#urlbar-input::placeholder {
+  color: var(--color-text-muted) !important;
+}
+
+
+/* ==========================================================================
+ * Toolbar buttons
+ * ========================================================================== */
+
+/*
+ * Scope these to actual toolbars rather than every toolbarbutton in the
+ * browser chrome. Nova places toolbarbutton elements in several components.
+ */
+
+#nav-bar toolbarbutton,
+#PersonalToolbar toolbarbutton {
+  color: var(--color-icon-muted) !important;
+}
+
+#nav-bar toolbarbutton:hover,
+#PersonalToolbar toolbarbutton:hover {
+  color: var(--color-text-primary) !important;
+}
+
+#nav-bar toolbarbutton > .toolbarbutton-icon,
+#PersonalToolbar toolbarbutton > .toolbarbutton-icon {
+  fill: currentColor !important;
+}
+
+
+/* ==========================================================================
+ * Tabs — shared horizontal + vertical behaviour
+ * ========================================================================== */
+
+.tabbrowser-tab {
+  color: var(--color-text-muted) !important;
+}
+
+.tabbrowser-tab[selected] {
+  color: var(--color-text-primary) !important;
+}
+
+
+/* Inactive tab hover */
+
+.tabbrowser-tab:not([selected], [multiselected]):hover
+.tab-background {
+  background-color: var(--color-state-hover) !important;
+}
+
+
+/*
+ * IMPORTANT:
+ *
+ * Do not set:
+ *
+ *   background:
+ *   background-image:
+ *   border:
+ *   outline:
+ *
+ * on the selected .tab-background here.
+ *
+ * Nova uses that element to render its selected-tab gradient border.
+ */
+
+
+/* Tab close button */
+
+.tab-close-button {
+  color: var(--color-icon-muted-x) !important;
+}
+
+.tab-close-button:hover {
+  color: var(--color-text-primary) !important;
+  background-color: var(--color-state-hover) !important;
+}
+
+
+/* ==========================================================================
+ * Menus / panels / popups
+ * ========================================================================== */
+
+menupopup,
+panel {
+  --panel-background: var(--color-surface-elevated) !important;
+  --panel-color: var(--color-text-primary) !important;
+}
+
+menu,
+menuitem {
+  color: var(--color-text-primary) !important;
+}
+
+menu[_moz-menuactive],
+menuitem[_moz-menuactive] {
+  background-color: var(--color-state-hover) !important;
+}
+
+menu[disabled],
+menuitem[disabled] {
+  color: var(--color-text-muted) !important;
+}
+
+
+/* ==========================================================================
+ * macOS translucent horizontal tab strip
+ * ========================================================================== */
+
+@media (-moz-platform: macos) {
+  :root {
+    --uc-tabbar-tint:
+      color-mix(
+        in srgb,
+        var(--color-surface-base) 45%,
+        transparent
+      );
+  }
+
+  body,
+  #navigator-toolbox {
+    background-color: transparent !important;
+    background-image: none !important;
+  }
+
+  body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+
+    -moz-default-appearance: -moz-window-titlebar;
+    appearance: auto;
+  }
+
+  /*
+   * Only apply translucency to the horizontal TabsToolbar.
+   * Vertical tabs get --color-surface-sidebar instead.
+   */
+  #TabsToolbar {
+    background-color: var(--uc-tabbar-tint) !important;
+  }
+}

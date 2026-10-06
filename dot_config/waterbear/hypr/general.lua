@@ -11,7 +11,7 @@ hl.config({
 
     col = {
       active_border   = { colors = {colors.text, colors.accent}, angle = 315 },
-      inactive_border = colors.textMuted,
+      inactive_border = colors.background,
     },
 
     layout = "dwindle",

@@ -10,11 +10,10 @@
 local home = os.getenv("HOME")
 
 hl.on("hyprland.start", function () 
-  hl.exec_cmd("qs")
-  hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
-  hl.exec_cmd("hypridle")
-  hl.exec_cmd(home .. "/.local/bin/set-background")
-  hl.exec_cmd("nm-applet")
-  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=dwl")
-  hl.exec_cmd("nm-applet --indicator")
+  hl.exec_cmd("qs") -- my shell does most things!
+  hl.exec_cmd(home .. "/.local/bin/set-background") -- background
+  hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1") -- for priviledge escalation
+  hl.exec_cmd("hypridle") -- for correct idling and locking
+  hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=wayland") -- for DBUS integration (firefox correctly screen sharing)
+  hl.exec_cmd("fcitx5") -- sets up the japanese romaji input program
 end)

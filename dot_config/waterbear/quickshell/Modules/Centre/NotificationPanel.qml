@@ -302,10 +302,7 @@ Rectangle {
               ? Colors.text
               : Colors.textMuted
 
-              onClicked:
-              NotificationService.toggleRead(
-                notificationDelegate.modelData.recordId
-              )
+              onClicked: root.toggleSelectedRead()
             }
 
             ActionText {
@@ -317,10 +314,7 @@ Rectangle {
               ? Colors.urgent
               : Colors.textMuted
 
-              onClicked:
-              NotificationService.toggleUrgent(
-                notificationDelegate.modelData.recordId
-              )
+              onClicked: root.toggleSelectedUrgent()
             }
 
             ActionText {
@@ -332,19 +326,17 @@ Rectangle {
               ? Colors.text
               : Colors.textMuted
 
-              onClicked: {
-                if (
-                  notificationDelegate.modelData.dismissed
-                ) {
-                  NotificationService.restoreFromHistory(
-                    notificationDelegate.modelData.recordId
-                  )
-                } else {
-                  NotificationService.dismiss(
-                    notificationDelegate.modelData.recordId
-                  )
-                }
-              }
+              onClicked: root.dismissSelected()
+            }
+
+            ActionText {
+              text: "󰆏" // copy icon; adjust for your Nerd Font
+
+              textItem.color: hovered
+              ? Colors.text
+              : Colors.textMuted
+
+              onClicked: root.copySelected()
             }
 
             Repeater {
@@ -358,18 +350,11 @@ Rectangle {
 
                 text: modelData.text
 
-                enabled:
-                notificationDelegate.modelData.live
+                enabled: notificationDelegate.modelData.live
 
-                textItem.color: hovered
-                ? Colors.text
-                : Colors.textMuted
+                textItem.color: hovered ? Colors.text : Colors.textMuted
 
-                onClicked:
-                NotificationService.invokeAction(
-                  notificationDelegate.modelData.recordId,
-                  modelData.identifier
-                )
+                onClicked: root.activateSelected()
               }
             }
           }
@@ -475,6 +460,23 @@ Rectangle {
         record.actions[0].identifier
       )
     }
+  }
+
+  function copySelected() {
+    const record = selectedRecord()
+
+    if (!record)
+    return
+
+    const parts = []
+
+    if (record.summary)
+    parts.push(record.summary)
+
+    if (record.body)
+    parts.push(record.body)
+
+    Quickshell.clipboardText = parts.join("\n")
   }
 
   // ---------------------------------------------------------------------------

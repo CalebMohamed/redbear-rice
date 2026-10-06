@@ -11,14 +11,14 @@ selection-foreground={{ background | strip }}
 selection-background={{ foreground | strip }}  
 urls={{ color4 | strip }}  
 
-regular0={{ color0 | strip }}                                   # bright black
-regular1={{ color1 | lighten(0.5) | saturate(0.15) | strip }}   # bright red
-regular2={{ color2 | lighten(0.5) | saturate(0.15) | strip }}   # bright green
-regular3={{ color3 | lighten(0.5) | saturate(0.15) | strip }}   # bright yellow
-regular4={{ color4 | lighten(0.5) | saturate(0.15) | strip }}   # bright blue
-regular5={{ color5 | lighten(0.5) | saturate(0.15) | strip }}   # bright magenta
-regular6={{ color6 | lighten(0.5) | saturate(0.15) | strip }}   # bright cyan
-regular7={{ color7 | lighten(0.5) | strip }}                    # bright white
+regular0={{ color0 | strip }}                                   # dark black
+regular1={{ color1 | lighten(0.5) | saturate(0.15) | strip }}   # dark red
+regular2={{ color2 | lighten(0.5) | saturate(0.15) | strip }}   # dark green
+regular3={{ color3 | lighten(0.5) | saturate(0.15) | strip }}   # dark yellow
+regular4={{ color4 | lighten(0.5) | saturate(0.15) | strip }}   # dark blue
+regular5={{ color5 | lighten(0.5) | saturate(0.15) | strip }}   # dark magenta
+regular6={{ color6 | lighten(0.5) | saturate(0.15) | strip }}   # dark cyan
+regular7={{ color7 | lighten(0.5) | strip }}                    # dark white
 
 [colors-light]
 alpha=0.75

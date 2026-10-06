@@ -27,13 +27,11 @@ FocusScope {
       break
 
       case Qt.Key_Home:
-      if (listView.count > 0)
       panel.selectFirst()
       event.accepted = true
       break
 
       case Qt.Key_End:
-      if (listView.count > 0)
       panel.selectLast()
       event.accepted = true
       break
@@ -55,6 +53,13 @@ FocusScope {
         panel.dismissSelected()
       }
       event.accepted = true
+      break
+
+      case Qt.Key_C:
+      if (event.modifiers & Qt.ControlModifier) {
+        panel.copySelected()
+        event.accepted = true
+      }
       break
 
       case Qt.Key_Delete:

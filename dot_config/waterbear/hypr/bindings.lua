@@ -33,7 +33,7 @@ hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("qs ipc call clock toggle"))
 
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
--- hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
+hl.bind(mainMod .. " + D", hl.dsp.layout("togglesplit"))    -- dwindle only
 
 -- Dwindle movement and swapping
 hl.bind(mainMod .. " + H",  hl.dsp.focus({ direction = "left" }))
