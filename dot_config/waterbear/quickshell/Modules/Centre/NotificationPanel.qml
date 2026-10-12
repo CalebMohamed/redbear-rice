@@ -214,6 +214,13 @@ Rectangle {
             }
 
             Text {
+              text: Qt.formatDateTime(new Date(notificationDelegate.modelData.timestampMs), "HH:mm")
+
+              color: Colors.textMuted
+              font: Shell.Style.uiFont
+            }
+
+            Text {
               visible:
               !notificationDelegate.modelData.read
 
