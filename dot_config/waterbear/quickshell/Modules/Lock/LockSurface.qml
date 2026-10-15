@@ -97,6 +97,7 @@ WlSessionLockSurface {
 
       focus: root.secure
 
+      Keys.onEscapePressed: clear()
       Keys.onReturnPressed: submitPassword()
       Keys.onEnterPressed: submitPassword()
 
