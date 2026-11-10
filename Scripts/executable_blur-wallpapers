@@ -1,6 +1,6 @@
 #!/bin/bash
-SRC_DIR="$HOME/pictures/wallpapers"
-OUT_DIR="$HOME/pictures/wallpapers-processed"
+SRC_DIR="$HOME/Pictures/wallpapers"
+OUT_DIR="$HOME/Pictures/wallpapers-processed"
 mkdir -p "$OUT_DIR"
 
 for img in "$SRC_DIR"/*.{jpg,jpeg,png}; do

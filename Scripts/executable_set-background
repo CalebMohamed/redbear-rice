@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SOURCE_DIR="$HOME/pictures/wallpapers"
-BLUR_DIR="$HOME/pictures/wallpapers-processed"
+SOURCE_DIR="$HOME/Pictures/wallpapers"
+BLUR_DIR="$HOME/Pictures/wallpapers-processed"
 CURRENT="$HOME/.local/share/current_wallpaper"
 
 blur-wallpapers
