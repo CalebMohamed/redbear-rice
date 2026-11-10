@@ -2,6 +2,9 @@
 font=CaskaydiaCove NFM:size=16,JetBrainsMono NFM:size=16,Noto Color Emoji:size=16
 pad=16x16
 
+[bell]
+system=no
+
 [colors-dark]
 alpha=0.75
 alpha-mode=default
