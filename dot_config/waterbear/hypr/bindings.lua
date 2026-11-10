@@ -20,7 +20,7 @@ hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/de
 hl.bind(mainMod .. " + SHIFT + SPACE", hl.dsp.window.float({ action = "toggle" }))
 
 -- wallpaper change
-hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("ls $HOME/pictures/wallpapers | wmenu-pretty -p 'select wallpaper' -l 10 -i | xargs -I {} set-background '{}'"))
+hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("ls $HOME/Pictures/wallpapers | wmenu-pretty -p 'select wallpaper' -l 10 -i | xargs -I {} set-background '{}'"))
 -- lock
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("waterbear-lock"))
 -- open system centre
